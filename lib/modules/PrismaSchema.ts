@@ -10,4 +10,9 @@ export class PrismaSchema {
 		this.models.set(modelName, model);
 		return model;
 	};
+
+	toString() {
+		const models = [...this.models.values()]
+		return models.map((model) => model.toString()).join("\n\n");
+	}
 }
