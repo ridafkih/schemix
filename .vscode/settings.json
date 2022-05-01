@@ -1,6 +1,8 @@
 {
 	"conventionalCommits.scopes": [
 		"types",
-		"lib"
+		"lib",
+		"config",
+		"deps"
 	]
 }

@@ -7,9 +7,21 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc --declaration && tsc-alias"
   },
-  "keywords": ["prisma", "schema", "mix"],
+  "keywords": [
+    "prisma",
+    "schema",
+    "mix"
+  ],
   "author": "Rida F'kih",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.31",
+    "ts-node": "^10.7.0",
+    "tsc-alias": "^1.6.7",
+    "tsconfig-paths": "^3.14.1",
+    "typescript": "^4.6.4"
+  }
 }
