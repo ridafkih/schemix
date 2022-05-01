@@ -13,32 +13,32 @@ export class PrismaModelField {
 		private type: PrismaFieldTypeName
 	) {};
 
-	setOptional() {
+	public setOptional() {
 		this.modifier = "?";		
 		return this;
 	};
 
-	setList() {
+	public setList() {
 		this.modifier = "[]";
 		return this;
 	};
 
-	setAsId() {
+	public setAsId() {
 		this.attributes.set("id", "@id");
 		return this;
 	};
 
-	setUnique() {
+	public setUnique() {
 		this.attributes.set("unique", "@unique");
 		return this;
 	};
 	
-	setToUpdatedAt() {
+	public setToUpdatedAt() {
 		this.attributes.set("updatedAt", "@updatedAt");
 		return this;
 	};
 
-	setDefault(defaultValue: string | number | { cuid: boolean, uuid: boolean, now: boolean }) {
+	public setDefault(defaultValue: string | number | { cuid: boolean, uuid: boolean, now: boolean }) {
 		const setDefaultValue = (value: string) => this.attributes.set("default", `@default(${value})`);
 		switch (typeof defaultValue) {
 			case "object":
@@ -55,12 +55,12 @@ export class PrismaModelField {
 		return this;
 	};
 
-	mapTo(fieldName: string) {
+	public mapTo(fieldName: string) {
 		this.attributes.set("map", `@map("${fieldName}")`);
 		return this;
 	};
 
-	toTokenArray() {
+	public toTokenArray() {
 		const { name, type, modifier, attributes } = this;
 		return [name, type + modifier, ...attributes.values()] as string[];
 	};

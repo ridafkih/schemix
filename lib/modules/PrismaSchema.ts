@@ -5,13 +5,13 @@ export class PrismaSchema {
 	
 	constructor() {};
 
-	createModel(modelName: string) {
+	public createModel(modelName: string) {
 		const model = new PrismaModel(modelName);
 		this.models.set(modelName, model);
 		return model;
 	};
 
-	toString() {
+	public toString() {
 		const models = [...this.models.values()];
 		return models.map((model) => model.toString()).join("\n\n");
 	};
