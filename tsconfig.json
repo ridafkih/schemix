@@ -14,8 +14,9 @@
     "paths": {
       "@/*": ["*"]
     },
+		"types": ["node"],
     "typeRoots": ["./lib/@types", "./lib/node_modules/@types"]
   },
-  "include": ["lib/**/*", "index.ts"],
+  "include": ["lib/**/*"],
   "exclude": ["node_modules"]
 }
