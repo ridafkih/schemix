@@ -3,7 +3,7 @@ import { PrismaModel } from "@/modules/PrismaModel";
 export class PrismaSchema {
 	private models: Map<string, PrismaModel> = new Map();
 	
-	constructor() {}
+	constructor() {};
 
 	createModel(modelName: string) {
 		const model = new PrismaModel(modelName);
@@ -12,7 +12,7 @@ export class PrismaSchema {
 	};
 
 	toString() {
-		const models = [...this.models.values()]
+		const models = [...this.models.values()];
 		return models.map((model) => model.toString()).join("\n\n");
-	}
-}
+	};
+};

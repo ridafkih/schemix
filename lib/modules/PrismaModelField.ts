@@ -1,4 +1,8 @@
-import { PrismaFieldAttribute, PrismaFieldModifier, PrismaFieldTypeName } from "@/@types/prisma-field";
+import {
+	PrismaFieldAttribute,
+	PrismaFieldModifier,
+	PrismaFieldTypeName
+} from "@/@types/prisma-field";
 
 export class PrismaModelField {
 	private attributes: Map<string, PrismaFieldAttribute> = new Map();
@@ -7,7 +11,7 @@ export class PrismaModelField {
 	constructor(
 		private readonly name: string,
 		private type: PrismaFieldTypeName
-	) {}
+	) {};
 
 	setOptional() {
 		this.modifier = "?";		
@@ -45,8 +49,8 @@ export class PrismaModelField {
 				setDefaultValue(`"${defaultValue}"`)
 				break;
 			default:
-				setDefaultValue(defaultValue.toString())
-		}
+				setDefaultValue(defaultValue.toString());
+		};
 		
 		return this;
 	};
