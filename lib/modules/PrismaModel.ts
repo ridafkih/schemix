@@ -44,7 +44,7 @@ export class PrismaModel {
 		].join("\n");
 	};
 
-	private createField(fieldName: string, type: PrismaFieldTypeName, options: FieldOptions) {
+	private createField(fieldName: string, type: PrismaFieldTypeName, options: FieldOptions = {}) {
 		const field = new PrismaModelField(fieldName, type);
 		handleOptions(field, options);
 		this.fields.set(fieldName, field);
