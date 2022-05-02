@@ -1,5 +1,15 @@
 import { PrismaSchema } from "@/modules/PrismaSchema"
 
-export const createSchema = () => {
-	return new PrismaSchema();
-};
+import { PrismaDataSourceOptions } from "./@types/prisma-datasource";
+import { PrismaGeneratorOptions } from "./@types/prisma-generator";
+
+interface CreateSchemaOptions {
+	datasource: PrismaDataSourceOptions;
+	generator: PrismaGeneratorOptions;
+}
+
+export const createSchema = ({
+	datasource,
+	generator
+}: CreateSchemaOptions) =>
+	new PrismaSchema(datasource, generator);
