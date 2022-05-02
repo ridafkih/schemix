@@ -10,11 +10,12 @@ export const parseKeyValueBlock = (
   name: string,
   entries: [string, string][]
 ) => {
+  const tokenPadding = Math.max(...entries.map(([key]) => key.length));
   const body = entries
     .map(([key, value]) => {
       return typeof value === "string"
-        ? `  ${key} = "${value}"`
-        : `  ${key} = ${JSON.stringify(value)}`;
+        ? `  ${key.padEnd(tokenPadding)} = "${value}"`
+        : `  ${key.padEnd(tokenPadding)} = ${JSON.stringify(value)}`;
     })
     .join("\n");
 
