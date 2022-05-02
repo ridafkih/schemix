@@ -29,6 +29,11 @@ export class PrismaRelationalField {
     return this;
   }
 
+  public setName(targetName: string) {
+    this.relationAttributes.set("name", `"${targetName}"`);
+    return this;
+  }
+
   public setReferences(tokens: string[]) {
     this.relationAttributes.set("references", `[${tokens.join(", ")}]`);
     return this;

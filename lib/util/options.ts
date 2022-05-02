@@ -46,6 +46,7 @@ export const handleRelationalOptions = <T extends RelationalFieldOptions>(
     list: "setList",
     map: "mapTo",
     fields: "setFields",
+    name: "setName",
     references: "setReferences",
     onDelete: "setOnDelete",
     onUpdate: "setOnUpdate",
