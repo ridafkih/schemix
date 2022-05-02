@@ -34,6 +34,16 @@ export class PrismaRelationalField {
     return this;
   }
 
+  public setOnDelete(action: string) {
+    this.relationAttributes.set("onDelete", action);
+    return this;
+  }
+
+  public setOnUpdate(action: string) {
+    this.relationAttributes.set("onUpdate", action);
+    return this;
+  }
+
   public setOptional() {
     this.modifier = "?";
     return this;

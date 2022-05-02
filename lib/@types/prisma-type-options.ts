@@ -112,6 +112,8 @@ export type RelationalFieldOptions = (
 ) & {
   references?: string[];
   fields?: string[];
+  onDelete?: "Cascade" | "Restrict" | "NoAction";
+  onUpdate?: "Cascade" | "Restrict" | "NoAction";
   name?: string;
 } & DefaultFieldOptions;
 
