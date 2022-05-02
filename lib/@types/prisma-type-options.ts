@@ -92,6 +92,20 @@ export type DateTimeFieldOptions = {
   optional?: true;
 } & DefaultFieldOptions;
 
+export type JsonFieldOptions = (
+  | {
+      default?: object | string | undefined;
+      optional?: true;
+      list?: never;
+    }
+  | {
+      default?: never;
+      optional?: never;
+      list?: true;
+    }
+) &
+  DefaultFieldOptions;
+
 export type RelationalFieldOptions = (
   | {
       list?: true;
@@ -129,4 +143,5 @@ export type FieldOptions =
   | FloatFieldOptions
   | BooleanFieldOptions
   | DateTimeFieldOptions
+  | JsonFieldOptions
   | EnumFieldOptions;

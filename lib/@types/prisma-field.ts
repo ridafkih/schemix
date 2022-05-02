@@ -6,6 +6,7 @@ export enum PrismaFieldType {
   FLOAT = "Float",
   BOOLEAN = "Boolean",
   DATE_TIME = "DateTime",
+  JSON = "Json",
 }
 
 export type PrismaFieldTypeName = LiteralUnion<`${PrismaFieldType}`>;

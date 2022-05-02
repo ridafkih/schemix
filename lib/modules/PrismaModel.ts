@@ -9,6 +9,7 @@ import {
   handleRelationalOptions,
   handleScalarOptions,
 } from "@/util/options";
+import { parseStringOrObject } from "@/util/parse";
 
 import { PrismaFieldTypeName } from "@/@types/prisma-field";
 import {
@@ -18,6 +19,7 @@ import {
   FieldOptions,
   FloatFieldOptions,
   IntFieldOptions,
+  JsonFieldOptions,
   RelationalFieldOptions,
   StringFieldOptions,
 } from "@/@types/prisma-type-options";
@@ -54,6 +56,18 @@ export class PrismaModel {
 
   public dateTime(fieldName: string, options?: DateTimeFieldOptions) {
     return this.createField(fieldName, "DateTime", options);
+  }
+
+  public json(fieldName: string, options?: JsonFieldOptions) {
+    const parsedDefault = options?.default
+      ? parseStringOrObject(options?.default)
+      : undefined;
+
+    const newOptions = parsedDefault
+      ? ({ ...options, default: parsedDefault } as FieldOptions)
+      : options;
+
+    return this.createField(fieldName, "Json", newOptions);
   }
 
   public enum(
