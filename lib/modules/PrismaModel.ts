@@ -1,23 +1,33 @@
+import { PrismaEnum } from "@/modules/PrismaEnum";
 import { PrismaSchema } from "@/modules/PrismaSchema";
+import { PrismaEnumField } from "@/modules/PrismaEnumField";
 import { PrismaScalarField } from "@/modules/PrismaScalarField";
 import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
-import { handleRelationalOptions, handleScalarOptions } from "@/util/options";
+import {
+  handleEnumOptions,
+  handleRelationalOptions,
+  handleScalarOptions,
+} from "@/util/options";
 
 import { PrismaFieldTypeName } from "@/@types/prisma-field";
 import {
   BooleanFieldOptions,
   DateTimeFieldOptions,
+  EnumFieldOptions,
   FieldOptions,
   FloatFieldOptions,
   IntFieldOptions,
   RelationalFieldOptions,
   StringFieldOptions,
 } from "@/@types/prisma-type-options";
+import { PrismaEnumOptions } from "@/@types/prisma-enum";
 
 export class PrismaModel {
-  private fields: Map<string, PrismaScalarField | PrismaRelationalField> =
-    new Map();
+  private fields: Map<
+    string,
+    PrismaScalarField | PrismaRelationalField | PrismaEnumField
+  > = new Map();
   private rawFields: string[] = [];
 
   constructor(
@@ -43,6 +53,14 @@ export class PrismaModel {
 
   public dateTime(fieldName: string, options?: DateTimeFieldOptions) {
     return this.createField(fieldName, "DateTime", options);
+  }
+
+  public enum(
+    fieldName: string,
+    prismaEnum: PrismaEnum,
+    options?: EnumFieldOptions
+  ) {
+    return this.createEnumField(fieldName, prismaEnum.name, options);
   }
 
   public relation(
@@ -83,6 +101,17 @@ export class PrismaModel {
     if (!model.name) return this;
     const field = new PrismaRelationalField(fieldName, model.name);
     handleRelationalOptions(field, options);
+    this.fields.set(fieldName, field);
+    return this;
+  }
+
+  private createEnumField(
+    fieldName: string,
+    type: string,
+    options: PrismaEnumOptions = {}
+  ) {
+    const field = new PrismaEnumField(fieldName, type);
+    handleEnumOptions(field, options);
     this.fields.set(fieldName, field);
     return this;
   }

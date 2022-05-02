@@ -115,9 +115,29 @@ export type RelationalFieldOptions = (
   name?: string;
 } & DefaultFieldOptions;
 
+export type EnumFieldOptions = (
+  | {
+      default?: string;
+      list?: never;
+      optional?: never;
+    }
+  | {
+      default?: never;
+      list?: true;
+      optional?: never;
+    }
+  | {
+      default?: never;
+      list?: never;
+      optional?: true;
+    }
+) &
+  DefaultFieldOptions;
+
 export type FieldOptions =
   | StringFieldOptions
   | IntFieldOptions
   | FloatFieldOptions
   | BooleanFieldOptions
-  | DateTimeFieldOptions;
+  | DateTimeFieldOptions
+  | EnumFieldOptions;

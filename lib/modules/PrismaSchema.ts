@@ -1,4 +1,5 @@
 import { PrismaModel } from "@/modules/PrismaModel";
+import { PrismaEnum } from "@/modules/PrismaEnum";
 
 import { exportSchema } from "@/util/export";
 import { parseKeyValueBlock } from "@/util/blocks";
@@ -7,6 +8,7 @@ import { PrismaDataSourceOptions } from "@/@types/prisma-datasource";
 import { PrismaGeneratorOptions } from "@/@types/prisma-generator";
 
 export class PrismaSchema {
+  private enums: Map<string, PrismaEnum> = new Map();
   private models: Map<string, PrismaModel> = new Map();
 
   constructor(
@@ -61,6 +63,17 @@ export class PrismaSchema {
   }
 
   /**
+   * Creates a `PrismaEnum` object and automatically attaches it to the schema.
+   * @param enumName The name of the enum.
+   * @returns The `PrismaEnum` object.
+   */
+  public createEnum(enumName: string) {
+    const prismaEnum = new PrismaEnum(enumName);
+    this.enums.set(enumName, prismaEnum);
+    return prismaEnum;
+  }
+
+  /**
    * Parses the schema into a singular schema string.
    * @returns Returns a singular schema string.
    */
@@ -68,6 +81,7 @@ export class PrismaSchema {
     const models = [
       this.parseDataSource(),
       this.parseGenerator(),
+      ...this.enums.values(),
       ...this.models.values(),
     ];
 

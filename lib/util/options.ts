@@ -1,10 +1,12 @@
+import { PrismaEnumField } from "@/modules/PrismaEnumField";
 import { PrismaScalarField } from "@/modules/PrismaScalarField";
+import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 import {
+  EnumFieldOptions,
   FieldOptions,
   RelationalFieldOptions,
 } from "@/@types/prisma-type-options";
-import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 /**
  * Manipulates the `PrismaScalarField` based on the options provided.
@@ -45,6 +47,27 @@ export const handleRelationalOptions = <T extends RelationalFieldOptions>(
     map: "mapTo",
     fields: "setFields",
     references: "setReferences",
+    raw: "setRawAttributes",
+  };
+
+  for (const [key, value] of Object.entries(options))
+    field[propertyMap[key]]?.(value);
+};
+
+/**
+ * Manipulates the `PrismaEnumField` based on the options provided.
+ * @param field The prisma enum field object.
+ * @param options The options object.
+ */
+export const handleEnumOptions = <T extends EnumFieldOptions>(
+  field: PrismaEnumField,
+  options: T
+) => {
+  const propertyMap: Record<string, keyof PrismaEnumField> = {
+    default: "setDefault",
+    optional: "setOptional",
+    list: "setList",
+    map: "mapTo",
     raw: "setRawAttributes",
   };
 
