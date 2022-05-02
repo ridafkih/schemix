@@ -86,9 +86,9 @@ import { PostTypeEnum } from "../_schema";
 
 PostTypeEnum
   .addValue("FEED", { map: "feed" })
-	.addValue("COMMENT", {
-		map: "comment",
-	});
+  .addValue("COMMENT", {
+    map: "comment",
+  });
 ```
 
 The aforementioned configuration would produce the following Prisma schema:
