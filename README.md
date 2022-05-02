@@ -52,7 +52,8 @@ PrismaSchema.export("./", "schema");
 
 import { UserModel, PostModel, PostTypeEnum } from "../_schema";
 
-UserModel.string("id", { id: true, default: { uuid: true } })
+UserModel
+  .string("id", { id: true, default: { uuid: true } })
   .int("registrantNumber", { default: { autoincrement: true } })
   .boolean("isBanned", { default: false })
   .relation("posts", PostModel, { list: true })
@@ -65,7 +66,8 @@ UserModel.string("id", { id: true, default: { uuid: true } })
 
 import { UserModel, PostModel } from "../_schema";
 
-PostModel.string("id", { id: true, default: { uuid: true } })
+PostModel
+  .string("id", { id: true, default: { uuid: true } })
   .int("postNumber", { default: { autoincrement: true } })
   .string("content", { raw: "@database.VarChar(240)" })
   .boolean("isDeleted", { default: false })
@@ -82,7 +84,8 @@ PostModel.string("id", { id: true, default: { uuid: true } })
 
 import { PostTypeEnum } from "../_schema";
 
-PostTypeEnum.addValue("FEED", { map: "feed" }).addValue("COMMENT", {
+PostTypeEnum
+  .addValue("FEED", { map: "feed" }).addValue("COMMENT", {
   map: "comment",
 });
 ```
