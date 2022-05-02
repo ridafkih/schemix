@@ -4,7 +4,7 @@ import {
 	PrismaFieldTypeName
 } from "@/@types/prisma-field";
 
-export class PrismaModelField {
+export class PrismaScalarField {
 	private attributes: Map<string, PrismaFieldAttribute> = new Map();
 	private modifier: PrismaFieldModifier = "";
 	

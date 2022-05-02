@@ -1,5 +1,7 @@
-import { PrismaModelField } from "@/modules/PrismaModelField";
-import { handleOptions } from "@/util/options";
+import { PrismaScalarField } from "@/modules/PrismaScalarField";
+import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
+
+import { handleRelationalOptions, handleScalarOptions } from "@/util/options";
 
 import { PrismaFieldTypeName } from "@/@types/prisma-field";
 import {
@@ -8,32 +10,37 @@ import {
 	FieldOptions,
 	FloatFieldOptions,
 	IntFieldOptions,
+	RelationalFieldOptions,
 	StringFieldOptions
 } from "@/@types/prisma-type-options";
 
 export class PrismaModel {
-	private fields: Map<string, PrismaModelField> = new Map();
+	private fields: Map<string, PrismaScalarField | PrismaRelationalField> = new Map();
 	
 	constructor(public readonly name: string) {};
 
-	public string(fieldName: string, options: StringFieldOptions) {
+	public string(fieldName: string, options?: StringFieldOptions) {
 		return this.createField(fieldName, "String", options);
 	};
 
-	public int(fieldName: string, options: IntFieldOptions) {
+	public int(fieldName: string, options?: IntFieldOptions) {
 		return this.createField(fieldName, "Int", options);
 	};
 
-	public float(fieldName: string, options: FloatFieldOptions) {
+	public float(fieldName: string, options?: FloatFieldOptions) {
 		return this.createField(fieldName, "Float", options);
 	};
 
-	public boolean(fieldName: string, options: BooleanFieldOptions) {
+	public boolean(fieldName: string, options?: BooleanFieldOptions) {
 		return this.createField(fieldName, "Boolean", options);
 	};
 
-	public dateTime(fieldName: string, options: DateTimeFieldOptions) {
+	public dateTime(fieldName: string, options?: DateTimeFieldOptions) {
 		return this.createField(fieldName, "DateTime", options);
+	};
+
+	public relation(fieldName: string, model: PrismaModel, options?: RelationalFieldOptions) {
+		return this.createRelation(fieldName, model, options);
 	};
 	
 	public toString() {
@@ -44,9 +51,16 @@ export class PrismaModel {
 		].join("\n");
 	};
 
+	private createRelation(fieldName: string, model: PrismaModel, options: RelationalFieldOptions = {}) {
+		const field = new PrismaRelationalField(fieldName, model.name);
+		handleRelationalOptions(field, options);
+		this.fields.set(fieldName, field);
+		return this;
+	}
+	
 	private createField(fieldName: string, type: PrismaFieldTypeName, options: FieldOptions = {}) {
-		const field = new PrismaModelField(fieldName, type);
-		handleOptions(field, options);
+		const field = new PrismaScalarField(fieldName, type);
+		handleScalarOptions(field, options);
 		this.fields.set(fieldName, field);
 		return this;
 	};

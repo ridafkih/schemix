@@ -76,6 +76,14 @@ export type DateTimeFieldOptions = ({
 	optional?: true;
 }) & { map?: string; };
 
+export type RelationalFieldOptions = ({
+	list?: true;
+	optional?: never;
+} | {
+	list?: never;
+	optional?: true;
+}) & { references?: string[], fields?: string[] };
+
 export type FieldOptions =
 	| StringFieldOptions
 	| IntFieldOptions
