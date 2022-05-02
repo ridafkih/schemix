@@ -23,12 +23,12 @@ export class PrismaSchema {
 	};
 
 	public createMixin() {
-		const model = new PrismaModel();
+		const model = new PrismaModel(this);
 		return model;
 	};
 
 	public createModel(modelName: string) {
-		const model = new PrismaModel(modelName);
+		const model = new PrismaModel(this, modelName);
 		this.models.set(modelName, model);
 		return model;
 	};

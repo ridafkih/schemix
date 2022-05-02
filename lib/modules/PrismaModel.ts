@@ -1,3 +1,4 @@
+import { PrismaSchema } from "@/modules/PrismaSchema";
 import { PrismaScalarField } from "@/modules/PrismaScalarField";
 import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
@@ -18,7 +19,7 @@ export class PrismaModel {
 	private fields: Map<string, PrismaScalarField | PrismaRelationalField> = new Map();
 	private rawFields: string[] = [];
 	
-	constructor(public readonly name?: string) {};
+	constructor(private readonly schema: PrismaSchema, public readonly name?: string) {};
 
 	public string(fieldName: string, options?: StringFieldOptions) {
 		return this.createField(fieldName, "String", options);
@@ -47,11 +48,18 @@ export class PrismaModel {
 	public mixin(model: PrismaModel) {
 		[...model.fields.entries()].map(([key, value]) => this.fields.set(key, value));
 		return this;
-	}
+	};
 	
 	public raw(fieldText: string) {
 		this.rawFields.push(fieldText);
 	};
+
+	public extend(name: string) {
+		const clone = this.schema.createModel(name)
+		clone.fields = this.fields;
+		clone.rawFields = this.rawFields;
+		return clone;
+	}
 	
 	public toString() {
 		return [
