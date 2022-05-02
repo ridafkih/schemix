@@ -11,7 +11,8 @@ export const handleScalarOptions = <T extends FieldOptions>(field: PrismaScalarF
 		unique: "setUnique",
 		default: "setDefault",
 		map: "mapTo",
-		updatedAt: "setToUpdatedAt"
+		updatedAt: "setToUpdatedAt",
+		raw: "setRawAttributes"
 	};
 
 	for (const [key, value] of Object.entries(options))
@@ -24,7 +25,8 @@ export const handleRelationalOptions = <T extends RelationalFieldOptions>(field:
 		list: "setList",
 		map: "mapTo",
 		fields: "setFields",
-		references: "setReferences"
+		references: "setReferences",
+		raw: "setRawAttributes"
 	};
 
 	for (const [key, value] of Object.entries(options))

@@ -16,6 +16,7 @@ import {
 
 export class PrismaModel {
 	private fields: Map<string, PrismaScalarField | PrismaRelationalField> = new Map();
+	private rawFields: string[] = [];
 	
 	constructor(public readonly name: string) {};
 
@@ -42,6 +43,10 @@ export class PrismaModel {
 	public relation(fieldName: string, model: PrismaModel, options?: RelationalFieldOptions) {
 		return this.createRelation(fieldName, model, options);
 	};
+
+	public raw(fieldText: string) {
+		this.rawFields.push(fieldText);
+	}
 	
 	public toString() {
 		return [
@@ -78,10 +83,13 @@ export class PrismaModel {
 						? tokens[i].length
 						: paddings[i];
 
-		return fields.map((tokens) => {
-			return "  " + tokens.map((token, index) => 
-				token.padEnd(paddings[index])
-			).join(" ").trim();
-		}).join("\n");
+		return [
+			...fields.map((tokens) => {
+				return "  " + tokens.map((token, index) => 
+					token.padEnd(paddings[index])
+				).join(" ").trim();
+			}),
+			...this.rawFields.map((rawField) => "  " + rawField)
+		].join("\n");
 	};
 };

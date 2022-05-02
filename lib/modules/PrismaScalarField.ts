@@ -7,6 +7,7 @@ import {
 export class PrismaScalarField {
 	private attributes: Map<string, PrismaFieldAttribute> = new Map();
 	private modifier: PrismaFieldModifier = "";
+	private rawAttributeString: string = "";
 	
 	constructor(
 		private readonly name: string,
@@ -60,8 +61,13 @@ export class PrismaScalarField {
 		return this;
 	};
 
+	public setRawAttributes(rawAttributeString: string) {
+		this.rawAttributeString = rawAttributeString;
+		return this;
+	};
+
 	public toTokenArray() {
-		const { name, type, modifier, attributes } = this;
-		return [name, type + modifier, [...attributes.values()].join(" ")] as string[];
+		const { name, type, modifier, attributes, rawAttributeString } = this;
+		return [name, type + modifier, [...attributes.values(), rawAttributeString].join(" ")] as string[];
 	};
 };

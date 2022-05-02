@@ -8,6 +8,7 @@ export class PrismaRelationalField {
 	private relationAttributes: Map<string, string> = new Map();
 	private attributes: Map<string, PrismaFieldAttribute> = new Map();
 	private modifier: PrismaFieldModifier = "";
+	private rawAttributeString: string = "";
 	
 	constructor(
 		private readonly name: string,
@@ -46,15 +47,20 @@ export class PrismaRelationalField {
 		return this;
 	};
 
+	public setRawAttributes(rawAttributeString: string) {
+		this.rawAttributeString = rawAttributeString;
+		return this;
+	};
+
 	public toTokenArray() {
-		const { name, type, modifier, attributes } = this;
+		const { name, type, modifier, attributes, rawAttributeString } = this;
 		const parsedRelationAttribute = this.parseRelationAttribute();
 		
 		return [
 			name,
 			type + modifier,
 			...parsedRelationAttribute ? [parsedRelationAttribute] : [],
-			...attributes.values()
+			...[...attributes.values(), rawAttributeString]
 		] as string[];
 	};
 };

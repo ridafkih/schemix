@@ -1,3 +1,8 @@
+type DefaultFieldOptions = {
+	map?: string;
+	raw?: string;
+}
+
 export type StringFieldOptions = ({
 	id?: never;
 	default?: string;
@@ -16,7 +21,7 @@ export type StringFieldOptions = ({
 	unique?: never;
 	optional?: never;
 	list: true;
-}) & { map?: string; };
+}) & DefaultFieldOptions;
 
 export type IntFieldOptions = ({
 	id?: true;
@@ -36,7 +41,7 @@ export type IntFieldOptions = ({
 	optional?: never;
 	unique?: never;
 	list?: true;
-}) & { map?: string; };
+}) & DefaultFieldOptions;
 
 export type FloatFieldOptions = ({
 	default?: true;
@@ -58,7 +63,7 @@ export type FloatFieldOptions = ({
 	optional?: never;
 	unique?: never;
 	list: true;
-}) & { map?: string; };
+}) & DefaultFieldOptions;
 
 export type BooleanFieldOptions = ({
 	default?: boolean;
@@ -74,7 +79,7 @@ export type DateTimeFieldOptions = ({
 	default?: { now: true };
 	updatedAt?: true;
 	optional?: true;
-}) & { map?: string; };
+}) & DefaultFieldOptions;
 
 export type RelationalFieldOptions = ({
 	list?: true;
@@ -82,7 +87,11 @@ export type RelationalFieldOptions = ({
 } | {
 	list?: never;
 	optional?: true;
-}) & { references?: string[], fields?: string[], name?: string };
+}) & ({
+	references?: string[],
+	fields?: string[],
+	name?: string
+}) & DefaultFieldOptions;
 
 export type FieldOptions =
 	| StringFieldOptions
