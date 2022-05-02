@@ -40,12 +40,14 @@ export const schema = createSchema({
 export const UserSchema = schema.createModel("User");
 export const TweetSchema = schema.createModel("Tweet");
 
-UserSchema.string("id", { id: true, default: { uuid: true } })
+UserSchema
+  .string("id", { id: true, default: { uuid: true } })
   .string("name", { optional: true })
   .string("uuid", { default: { uuid: true } })
   .relation("tweets", TweetSchema, { list: true });
 
-TweetSchema.int("id", { id: true, default: { autoincrement: true } })
+TweetSchema
+  .int("id", { id: true, default: { autoincrement: true } })
   .string("content", { raw: "@database.VarChar(255)" })
   .relation("author", UserSchema, { fields: ["authorId"], references: ["id"] })
   .string("authorId")
