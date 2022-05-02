@@ -172,7 +172,9 @@ export class PrismaModel {
       ...(this.blockAttributes.length
         ? [
             "",
-            this.blockAttributes.map((blockAttribute) => "  " + blockAttribute),
+            ...this.blockAttributes.map(
+              (blockAttribute) => "  " + blockAttribute
+            ),
           ]
         : []),
     ].join("\n");
