@@ -81,7 +81,7 @@ export class PrismaModel {
 		return fields.map((tokens) => {
 			return "  " + tokens.map((token, index) => 
 				token.padEnd(paddings[index])
-			).join(" ");
+			).join(" ").trim();
 		}).join("\n");
 	};
 };
