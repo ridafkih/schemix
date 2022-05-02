@@ -62,6 +62,6 @@ export class PrismaScalarField {
 
 	public toTokenArray() {
 		const { name, type, modifier, attributes } = this;
-		return [name, type + modifier, ...attributes.values()] as string[];
+		return [name, type + modifier, [...attributes.values()].join(" ")] as string[];
 	};
 };

@@ -48,12 +48,12 @@ export class PrismaRelationalField {
 
 	public toTokenArray() {
 		const { name, type, modifier, attributes } = this;
-		const relationAttributes = this.parseRelationAttribute();
+		const parsedRelationAttribute = this.parseRelationAttribute();
 		
 		return [
 			name,
 			type + modifier,
-			...relationAttributes ? [relationAttributes] : [],
+			...parsedRelationAttribute ? [parsedRelationAttribute] : [],
 			...attributes.values()
 		] as string[];
 	};
