@@ -6,16 +6,20 @@ type DefaultFieldOptions = {
 export type StringFieldOptions = (
   | {
       id?: never;
-      default?: string;
-      unique?: never;
+      default?:
+        | string
+        | ({ uuid?: true; cuid?: never } | { uuid?: never; cuid?: true });
+      unique?: true;
       optional?: true;
       list?: never;
     }
   | {
       id?: true;
-      default?: { uuid?: true; cuid?: never } | { uuid?: never; cuid?: true };
+      default?:
+        | string
+        | ({ uuid?: true; cuid?: never } | { uuid?: never; cuid?: true });
       unique?: true;
-      optional?: true;
+      optional?: never;
       list?: never;
     }
   | {
@@ -55,21 +59,9 @@ export type IntFieldOptions = (
 
 export type FloatFieldOptions = (
   | {
-      default?: true;
-      optional?: never;
-      unique?: true;
-      list?: never;
-    }
-  | {
       default?: number;
-      optional?: never;
-      unique?: never;
-      list?: never;
-    }
-  | {
-      default?: never;
       optional?: true;
-      unique?: never;
+      unique?: true;
       list?: never;
     }
   | {
@@ -121,17 +113,12 @@ export type EnumFieldOptions = (
   | {
       default?: string;
       list?: never;
-      optional?: never;
+      optional?: true;
     }
   | {
       default?: never;
       list?: true;
       optional?: never;
-    }
-  | {
-      default?: never;
-      list?: never;
-      optional?: true;
     }
 ) &
   DefaultFieldOptions;
