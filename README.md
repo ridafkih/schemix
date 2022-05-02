@@ -57,7 +57,6 @@ UserModel
   .int("registrantNumber", { default: { autoincrement: true } })
   .boolean("isBanned", { default: false })
   .relation("posts", PostModel, { list: true })
-  .enum("postType", PostTypeEnum, { default: "COMMENT" })
   .raw('@@map("service_user")');
 ```
 
@@ -71,6 +70,7 @@ PostModel
   .int("postNumber", { default: { autoincrement: true } })
   .string("content", { raw: "@database.VarChar(240)" })
   .boolean("isDeleted", { default: false })
+  .enum("postType", PostTypeEnum, { default: "COMMENT" })
   .relation("author", UserModel, {
     optional: true,
     fields: ["authorId"],
@@ -87,8 +87,8 @@ import { PostTypeEnum } from "../_schema";
 PostTypeEnum
   .addValue("FEED", { map: "feed" })
 	.addValue("COMMENT", {
-  map: "comment",
-});
+		map: "comment",
+	});
 ```
 
 The aforementioned configuration would produce the following Prisma schema:
@@ -115,7 +115,6 @@ model User {
   registrantNumber Int      @default(autoincrement())
   isBanned         Boolean  @default(false)
   posts            Post[]
-  postType         PostType @default(COMMENT)
   @@map("service_user")
 }
 
@@ -124,6 +123,7 @@ model Post {
   postNumber Int     @default(autoincrement())
   content    String  @database.VarChar(240)
   isDeleted  Boolean @default(false)
+  postType   PostType @default(COMMENT)
   author     User?   @relation(fields: [authorId], references: [id])
   authorId   String?
 }
