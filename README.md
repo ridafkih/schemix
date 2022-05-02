@@ -85,7 +85,8 @@ PostModel
 import { PostTypeEnum } from "../_schema";
 
 PostTypeEnum
-  .addValue("FEED", { map: "feed" }).addValue("COMMENT", {
+  .addValue("FEED", { map: "feed" })
+	.addValue("COMMENT", {
   map: "comment",
 });
 ```
