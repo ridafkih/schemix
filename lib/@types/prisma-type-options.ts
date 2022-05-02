@@ -82,7 +82,7 @@ export type RelationalFieldOptions = ({
 } | {
 	list?: never;
 	optional?: true;
-}) & { references?: string[], fields?: string[] };
+}) & { references?: string[], fields?: string[], name?: string };
 
 export type FieldOptions =
 	| StringFieldOptions
