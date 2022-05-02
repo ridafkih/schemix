@@ -3,6 +3,7 @@
 		"types",
 		"lib",
 		"config",
-		"deps"
+		"deps",
+		"docs"
 	]
 }
