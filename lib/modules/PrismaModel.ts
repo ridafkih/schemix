@@ -18,7 +18,7 @@ export class PrismaModel {
 	private fields: Map<string, PrismaScalarField | PrismaRelationalField> = new Map();
 	private rawFields: string[] = [];
 	
-	constructor(public readonly name: string) {};
+	constructor(public readonly name?: string) {};
 
 	public string(fieldName: string, options?: StringFieldOptions) {
 		return this.createField(fieldName, "String", options);
@@ -44,9 +44,14 @@ export class PrismaModel {
 		return this.createRelation(fieldName, model, options);
 	};
 
+	public mixin(model: PrismaModel) {
+		[...model.fields.entries()].map(([key, value]) => this.fields.set(key, value));
+		return this;
+	}
+	
 	public raw(fieldText: string) {
 		this.rawFields.push(fieldText);
-	}
+	};
 	
 	public toString() {
 		return [
@@ -57,6 +62,7 @@ export class PrismaModel {
 	};
 
 	private createRelation(fieldName: string, model: PrismaModel, options: RelationalFieldOptions = {}) {
+		if (!model.name) return this;
 		const field = new PrismaRelationalField(fieldName, model.name);
 		handleRelationalOptions(field, options);
 		this.fields.set(fieldName, field);

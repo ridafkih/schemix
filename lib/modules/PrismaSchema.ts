@@ -16,11 +16,16 @@ export class PrismaSchema {
 
 	private parseDataSource() {
 		return parseKeyValueBlock("datasource", "database", Object.entries(this.datasource));
-	}
+	};
 	
 	private parseGenerator() {
 		return parseKeyValueBlock("generator", "client", Object.entries(this.generator));
-	}
+	};
+
+	public createMixin() {
+		const model = new PrismaModel();
+		return model;
+	};
 
 	public createModel(modelName: string) {
 		const model = new PrismaModel(modelName);
