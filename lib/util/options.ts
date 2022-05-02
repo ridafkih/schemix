@@ -6,6 +6,11 @@ import {
 } from "@/@types/prisma-type-options";
 import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
+/**
+ * Manipulates the `PrismaScalarField` based on the options provided.
+ * @param field THe prisma scalar field object.
+ * @param options The options object.
+ */
 export const handleScalarOptions = <T extends FieldOptions>(
   field: PrismaScalarField,
   options: T
@@ -25,6 +30,11 @@ export const handleScalarOptions = <T extends FieldOptions>(
     field[propertyMap[key]](value);
 };
 
+/**
+ * Manipulates the `PrismaRelationField` based on the options provided.
+ * @param field The prisma relational field object.
+ * @param options The options object.
+ */
 export const handleRelationalOptions = <T extends RelationalFieldOptions>(
   field: PrismaRelationalField,
   options: T

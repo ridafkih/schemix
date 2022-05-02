@@ -14,6 +14,11 @@ export class PrismaSchema {
     private readonly generator: PrismaGeneratorOptions
   ) {}
 
+  /**
+   * Parses a datasource block for the schema using the parameters
+   * provided in the constructor.
+   * @returns A string representing the datasource block.
+   */
   private parseDataSource() {
     return parseKeyValueBlock(
       "datasource",
@@ -22,6 +27,11 @@ export class PrismaSchema {
     );
   }
 
+  /**
+   * Parses a generator block for the schema using the parameters
+   * provided in the constructor.
+   * @returns A string representing the generator block.
+   */
   private parseGenerator() {
     return parseKeyValueBlock(
       "generator",
@@ -30,17 +40,30 @@ export class PrismaSchema {
     );
   }
 
+  /**
+   * Creates a mixin and automatically attaches it to the schema.
+   * @returns The `PrismaModel` object.
+   */
   public createMixin() {
     const model = new PrismaModel(this);
     return model;
   }
 
+  /**
+   * Creates a `PrismaModel` object and automatically attaches it to the schema.
+   * @param modelName The name of the model.
+   * @returns The `PrismaModel` object.
+   */
   public createModel(modelName: string) {
     const model = new PrismaModel(this, modelName);
     this.models.set(modelName, model);
     return model;
   }
 
+  /**
+   * Parses the schema into a singular schema string.
+   * @returns Returns a singular schema string.
+   */
   public toString() {
     const models = [
       this.parseDataSource(),
@@ -51,6 +74,11 @@ export class PrismaSchema {
     return models.map((model) => model.toString()).join("\n\n");
   }
 
+  /**
+   * Exports the schema to the provided filepath/filename.
+   * @param filepath The target filepath.
+   * @param filename The target filename.
+   */
   public export(filepath: string, filename: string) {
     exportSchema(filepath, filename, this);
   }
