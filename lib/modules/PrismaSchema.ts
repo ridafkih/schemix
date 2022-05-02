@@ -85,7 +85,7 @@ export class PrismaSchema {
       ...this.models.values(),
     ];
 
-    return models.map((model) => model.toString()).join("\n\n");
+    return models.map((model) => model.toString()).join("\n\n") + "\n";
   }
 
   /**

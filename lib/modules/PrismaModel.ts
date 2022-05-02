@@ -28,6 +28,7 @@ export class PrismaModel {
     string,
     PrismaScalarField | PrismaRelationalField | PrismaEnumField
   > = new Map();
+  private blockAttributes: string[] = [];
   private rawFields: string[] = [];
 
   constructor(
@@ -79,7 +80,9 @@ export class PrismaModel {
   }
 
   public raw(fieldText: string) {
-    this.rawFields.push(fieldText);
+    if (fieldText.startsWith("@@")) this.blockAttributes.push(fieldText);
+    else this.rawFields.push(fieldText);
+    return this;
   }
 
   public extend(name: string) {
@@ -152,6 +155,12 @@ export class PrismaModel {
         );
       }),
       ...this.rawFields.map((rawField) => "  " + rawField),
+      ...(this.blockAttributes.length
+        ? [
+            "",
+            this.blockAttributes.map((blockAttribute) => "  " + blockAttribute),
+          ]
+        : []),
     ].join("\n");
   }
 }
