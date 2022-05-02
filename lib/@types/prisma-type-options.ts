@@ -35,15 +35,15 @@ export type StringFieldOptions = (
 export type IntFieldOptions = (
   | {
       id?: true;
-      default?: { autoincrement: true };
+      default?: number | { autoincrement: true };
       unique?: true;
       optional?: never;
       list?: never;
     }
   | {
       id?: never;
-      default?: number;
-      unique?: never;
+      default?: number | { autoincrement: true };
+      unique?: true;
       optional?: true;
       list?: never;
     }
@@ -68,7 +68,7 @@ export type FloatFieldOptions = (
       default?: never;
       optional?: never;
       unique?: never;
-      list: true;
+      list?: true;
     }
 ) &
   DefaultFieldOptions;
