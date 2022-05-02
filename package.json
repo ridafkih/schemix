@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"build": "tsc --declaration && tsc-alias"
+    "build": "tsc --declaration && tsc-alias"
   },
   "keywords": [
     "prisma",
@@ -19,6 +19,13 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.31",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
     "tsc-alias": "^1.6.7",
     "tsconfig-paths": "^3.14.1",
