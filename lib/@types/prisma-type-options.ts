@@ -27,7 +27,7 @@ export type StringFieldOptions = (
       default?: never;
       unique?: never;
       optional?: never;
-      list: true;
+      list?: true;
     }
 ) &
   DefaultFieldOptions;
