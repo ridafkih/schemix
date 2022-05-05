@@ -10,7 +10,11 @@ export type PrismaDataSourceReferentialIntegrity = "foreignKeys" | "prisma";
 
 export interface PrismaDataSourceOptions {
   provider: PrismaDataSourceProvider;
-  url: string;
+  url:
+    | string
+    | {
+        env: string;
+      };
   shadowDatabaseUrl?: string;
   referentialIntegrity?: PrismaDataSourceReferentialIntegrity;
 }

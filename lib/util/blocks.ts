@@ -8,12 +8,15 @@
 export const parseKeyValueBlock = (
   keyword: string,
   name: string,
-  entries: [string, string][]
+  entries: [string, string | { env: string }][]
 ) => {
   const tokenPadding = Math.max(...entries.map(([key]) => key.length));
   const body = entries
     .map(([key, value]) => {
-      if (key === "url") return `  ${key.padEnd(tokenPadding)} = ${value}`;
+      if (key === "url" && typeof value !== "string" && "env" in value) {
+        return `  ${key.padEnd(tokenPadding)} = env("${value.env}")`;
+      }
+
       return typeof value === "string"
         ? `  ${key.padEnd(tokenPadding)} = "${value}"`
         : `  ${key.padEnd(tokenPadding)} = ${JSON.stringify(value)}`;
