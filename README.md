@@ -1,6 +1,12 @@
 # Schemix
 
-Schemix let's you programmatically generate Prisma schemas, the main intention behind this library was to allow you to segment/molecularize schemas, with larger projects, Prisma schemas can reach thousands of lines, and having it all in one place makes it extremely difficult to manage. Using Schemix, you will be able to develop your schema in a consumable, molecularized fashion, while maintaining the capabilities that the entire Prisma toolkit provides.
+[![NPM](https://nodei.co/npm/schemix.png)](https://nodei.co/npm/schemix/)
+
+Schemix let's you programmatically generate Prisma schemas.
+
+As Prisma schemas are not inherently segmentable, Schemix acts as a library to aid in generating your Prisma schema in a molecularized fashion using TypeScript, then exporting to one classic `.prisma` file to be consumed by your application.
+
+![Schemix](https://user-images.githubusercontent.com/9158485/166857076-883d8300-956b-465f-bed3-c7b8a7be866b.png)
 
 ## Installation
 
