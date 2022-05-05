@@ -13,6 +13,7 @@ export const parseKeyValueBlock = (
   const tokenPadding = Math.max(...entries.map(([key]) => key.length));
   const body = entries
     .map(([key, value]) => {
+      if (key === "url") return `  ${key.padEnd(tokenPadding)} = ${value}`;
       return typeof value === "string"
         ? `  ${key.padEnd(tokenPadding)} = "${value}"`
         : `  ${key.padEnd(tokenPadding)} = ${JSON.stringify(value)}`;
