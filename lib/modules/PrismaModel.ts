@@ -15,6 +15,7 @@ import { PrismaFieldTypeName } from "@/@types/prisma-field";
 import {
   BooleanFieldOptions,
   DateTimeFieldOptions,
+  DecimalFieldOptions,
   EnumFieldOptions,
   FieldOptions,
   FloatFieldOptions,
@@ -50,7 +51,7 @@ export class PrismaModel {
     return this.createField(fieldName, "BigInt", options);
   }
 
-  public decimal(fieldName: string, options?: IntFieldOptions) {
+  public decimal(fieldName: string, options?: DecimalFieldOptions) {
     return this.createField(fieldName, "Decimal", options);
   }
 
