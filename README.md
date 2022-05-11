@@ -106,7 +106,7 @@ The aforementioned configuration would produce the following Prisma schema:
 
 datasource database {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 generator client {
