@@ -35,7 +35,9 @@ import { createSchema } from "schemix";
 export const PrismaSchema = createSchema({
   datasource: {
     provider: "postgresql",
-    url: "env(DATABASE_URL)",
+    url: {
+      env: "DATABASE_URL"
+    },
   },
   generator: {
     provider: "prisma-client-js",
@@ -104,7 +106,7 @@ The aforementioned configuration would produce the following Prisma schema:
 
 datasource database {
   provider = "postgresql"
-  url = "env(DATABASE_URL)"
+  url = env("DATABASE_URL")
 }
 
 generator client {
@@ -121,6 +123,7 @@ model User {
   registrantNumber Int      @default(autoincrement())
   isBanned         Boolean  @default(false)
   posts            Post[]
+
   @@map("service_user")
 }
 
