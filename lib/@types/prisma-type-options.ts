@@ -73,6 +73,22 @@ export type FloatFieldOptions = (
 ) &
   DefaultFieldOptions;
 
+export type DecimalFieldOptions = (
+  | {
+      default?: number;
+      optional?: true;
+      unique?: true;
+      list?: never;
+    }
+  | {
+      default?: never;
+      optional?: never;
+      unique?: never;
+      list?: true;
+    }
+) &
+  DefaultFieldOptions;
+
 export type BooleanFieldOptions = (
   | {
       default?: boolean;
