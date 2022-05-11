@@ -46,6 +46,14 @@ export class PrismaModel {
     return this.createField(fieldName, "Int", options);
   }
 
+  public bigInt(fieldName: string, options?: IntFieldOptions) {
+    return this.createField(fieldName, "BigInt", options);
+  }
+
+  public decimal(fieldName: string, options?: IntFieldOptions) {
+    return this.createField(fieldName, "Decimal", options);
+  }
+
   public float(fieldName: string, options?: FloatFieldOptions) {
     return this.createField(fieldName, "Float", options);
   }

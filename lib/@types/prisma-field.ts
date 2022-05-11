@@ -3,6 +3,8 @@ type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 export enum PrismaFieldType {
   STRING = "String",
   INTEGER = "Int",
+  BIG_INT = "BigInt",
+  DECIMAL = "Decimal",
   FLOAT = "Float",
   BOOLEAN = "Boolean",
   DATE_TIME = "DateTime",
