@@ -13,8 +13,12 @@ export interface PrismaDataSourceOptions {
   url:
     | string
     | {
-        env: string;
-      };
-  shadowDatabaseUrl?: string;
+    env: string;
+  };
+  shadowDatabaseUrl?:
+    | string
+    | {
+    env: string;
+  };
   referentialIntegrity?: PrismaDataSourceReferentialIntegrity;
 }
