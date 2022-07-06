@@ -1,11 +1,11 @@
 {
   "name": "schemix",
-  "version": "0.5.12",
+  "version": "0.5.13",
   "description": "Schemix allows you to programmatically create Prisma schemas using TypeScript",
-	"repository": {
-		"url": "https://github.com/ridafkih/schemix"
-	},
-	"readme": "https://github.com/ridafkih/schemix/blob/main/README.md",
+  "repository": {
+    "url": "https://github.com/ridafkih/schemix"
+  },
+  "readme": "https://github.com/ridafkih/schemix/blob/main/README.md",
   "main": "dist/index.js",
   "directories": {
     "lib": "lib"
