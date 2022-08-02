@@ -5,4 +5,5 @@ export interface PrismaGeneratorOptions {
   previewFeatures?: string[];
   engineType?: "library" | "binary";
   binaryTargets?: string[];
+  [key: string]: string | string[] | undefined;
 }

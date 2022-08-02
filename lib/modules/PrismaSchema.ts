@@ -43,7 +43,11 @@ export class PrismaSchema {
 
     return generators
       .map(({ name = "client", ...generator }) =>
-        parseKeyValueBlock("generator", name, Object.entries(generator))
+        parseKeyValueBlock(
+          "generator",
+          name,
+          Object.entries(generator) as [string, string | string[]][]
+        )
       )
       .join("\n\n");
   }

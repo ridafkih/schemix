@@ -8,7 +8,7 @@
 export const parseKeyValueBlock = (
   keyword: string,
   name: string,
-  entries: [string, string | { env: string }][]
+  entries: [string, string | string[] | { env: string }][]
 ) => {
   const tokenPadding = Math.max(...entries.map(([key]) => key.length));
   const body = entries
