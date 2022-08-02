@@ -1,11 +1,14 @@
 import { PrismaSchema } from "@/modules/PrismaSchema";
 
 import { PrismaDataSourceOptions } from "@/@types/prisma-datasource";
-import { PrismaGeneratorOptions } from "@/@types/prisma-generator";
+import {
+  PrismaGeneratorOptions,
+  PrismaMultiGeneratorOptions,
+} from "@/@types/prisma-generator";
 
 interface CreateSchemaOptions {
   datasource: PrismaDataSourceOptions;
-  generator: PrismaGeneratorOptions;
+  generator: PrismaGeneratorOptions | PrismaMultiGeneratorOptions;
 }
 
 /**

@@ -5,7 +5,10 @@ import { exportSchema } from "@/util/export";
 import { parseKeyValueBlock } from "@/util/blocks";
 
 import { PrismaDataSourceOptions } from "@/@types/prisma-datasource";
-import { PrismaGeneratorOptions } from "@/@types/prisma-generator";
+import {
+  PrismaGeneratorOptions,
+  PrismaMultiGeneratorOptions,
+} from "@/@types/prisma-generator";
 
 export class PrismaSchema {
   private enums: Map<string, PrismaEnum> = new Map();
@@ -13,7 +16,9 @@ export class PrismaSchema {
 
   constructor(
     private readonly datasource: PrismaDataSourceOptions,
-    private readonly generator: PrismaGeneratorOptions
+    private readonly generator:
+      | PrismaGeneratorOptions
+      | PrismaMultiGeneratorOptions
   ) {}
 
   /**
@@ -35,11 +40,19 @@ export class PrismaSchema {
    * @returns A string representing the generator block.
    */
   private parseGenerator() {
-    return parseKeyValueBlock(
-      "generator",
-      "client",
-      Object.entries(this.generator)
-    );
+    const generators = Array.isArray(this.generator)
+      ? this.generator
+      : [this.generator];
+
+    return generators
+      .map(({ name = "client", ...generator }) =>
+        parseKeyValueBlock(
+          "generator",
+          name,
+          Object.entries(generator) as [string, string | string[]][]
+        )
+      )
+      .join("\n\n");
   }
 
   /**
