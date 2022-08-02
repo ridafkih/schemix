@@ -5,7 +5,7 @@ import { PrismaGeneratorOptions } from "@/@types/prisma-generator";
 
 interface CreateSchemaOptions {
   datasource: PrismaDataSourceOptions;
-  generator: PrismaGeneratorOptions;
+  generator: PrismaGeneratorOptions | PrismaGeneratorOptions[];
 }
 
 /**

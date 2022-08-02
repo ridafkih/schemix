@@ -13,7 +13,9 @@ export class PrismaSchema {
 
   constructor(
     private readonly datasource: PrismaDataSourceOptions,
-    private readonly generator: PrismaGeneratorOptions
+    private readonly generator:
+      | PrismaGeneratorOptions
+      | PrismaGeneratorOptions[]
   ) {}
 
   /**
@@ -35,11 +37,15 @@ export class PrismaSchema {
    * @returns A string representing the generator block.
    */
   private parseGenerator() {
-    return parseKeyValueBlock(
-      "generator",
-      "client",
-      Object.entries(this.generator)
-    );
+    const generators = Array.isArray(this.generator)
+      ? this.generator
+      : [this.generator];
+
+    return generators
+      .map(({ name = "client", ...generator }) =>
+        parseKeyValueBlock("generator", name, Object.entries(generator))
+      )
+      .join("\n\n");
   }
 
   /**
