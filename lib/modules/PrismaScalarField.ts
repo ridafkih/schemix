@@ -50,7 +50,7 @@ export class PrismaScalarField {
     switch (typeof defaultValue) {
       case "object":
         const [prismaFunc] =
-          Object.entries(defaultValue).find(([_key, value]) => value) || [];
+          Object.entries(defaultValue).find(([, value]) => value) || [];
         setDefaultValue(`${prismaFunc}()`);
         break;
       case "string":
