@@ -5,7 +5,10 @@ import { exportSchema } from "@/util/export";
 import { parseKeyValueBlock } from "@/util/blocks";
 
 import { PrismaDataSourceOptions } from "@/@types/prisma-datasource";
-import { PrismaGeneratorOptions } from "@/@types/prisma-generator";
+import {
+  PrismaGeneratorOptions,
+  PrismaMultiGeneratorOptions,
+} from "@/@types/prisma-generator";
 
 export class PrismaSchema {
   private enums: Map<string, PrismaEnum> = new Map();
@@ -15,7 +18,7 @@ export class PrismaSchema {
     private readonly datasource: PrismaDataSourceOptions,
     private readonly generator:
       | PrismaGeneratorOptions
-      | PrismaGeneratorOptions[]
+      | PrismaMultiGeneratorOptions
   ) {}
 
   /**

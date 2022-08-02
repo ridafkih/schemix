@@ -7,3 +7,7 @@ export interface PrismaGeneratorOptions {
   binaryTargets?: string[];
   [key: string]: string | string[] | undefined;
 }
+
+export type PrismaMultiGeneratorOptions = Array<
+  Omit<PrismaGeneratorOptions, "name"> & { name: string }
+>;
