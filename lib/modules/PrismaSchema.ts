@@ -9,12 +9,14 @@ import {
   PrismaGeneratorOptions,
   PrismaMultiGeneratorOptions,
 } from "@/@types/prisma-generator";
+import { importAllFiles } from "@/util/import";
 
 export class PrismaSchema {
   private enums: Map<string, PrismaEnum> = new Map();
   private models: Map<string, PrismaModel> = new Map();
 
   constructor(
+    private readonly basePath: string,
     private readonly datasource: PrismaDataSourceOptions,
     private readonly generator:
       | PrismaGeneratorOptions
@@ -90,15 +92,26 @@ export class PrismaSchema {
    * Parses the schema into a singular schema string.
    * @returns Returns a singular schema string.
    */
-  public toString() {
-    const models = [
-      this.parseDataSource(),
-      this.parseGenerator(),
-      ...this.enums.values(),
-      ...this.models.values(),
-    ];
+  public toString(): Promise<string> {
+    return new Promise(async (resolve) => {
+      await importAllFiles(this.basePath, "enums");
+      await importAllFiles(this.basePath, "mixins");
+      await importAllFiles(this.basePath, "models");
 
-    return models.map((model) => model.toString()).join("\n\n") + "\n";
+      setTimeout(() => {
+        const models = [
+          this.parseDataSource(),
+          this.parseGenerator(),
+          ...this.enums.values(),
+          ...this.models.values(),
+        ];
+
+        const schemaString =
+          models.map((model) => model.toString()).join("\n\n") + "\n";
+
+        resolve(schemaString);
+      }, 0);
+    });
   }
 
   /**

@@ -6,10 +6,15 @@ import {
   PrismaMultiGeneratorOptions,
 } from "@/@types/prisma-generator";
 
+type PrivateSchema = Omit<PrismaSchema, "createMixin" | "createEnum" | "createModel">;
+
 interface CreateSchemaOptions {
+  basePath: string;
   datasource: PrismaDataSourceOptions;
   generator: PrismaGeneratorOptions | PrismaMultiGeneratorOptions;
 }
+
+export let schema: PrismaSchema | undefined;
 
 /**
  * Create a Prisma schema object.
@@ -17,5 +22,9 @@ interface CreateSchemaOptions {
  * @param props.generator The generator object information for Prisma.
  * @returns The generated schema object.
  */
-export const createSchema = ({ datasource, generator }: CreateSchemaOptions) =>
-  new PrismaSchema(datasource, generator);
+export const createSchema = ({ basePath, datasource, generator }: CreateSchemaOptions) => {
+  schema = new PrismaSchema(basePath, datasource, generator);
+  return schema as PrivateSchema;
+}
+
+export { createMixin, createEnum, createModel } from "@/util/create";

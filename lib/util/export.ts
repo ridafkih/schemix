@@ -9,14 +9,14 @@ import { PrismaSchema } from "@/modules/PrismaSchema";
  * @param filename The filename of the target file (should not include `.prisma` extension).
  * @param schema The `PrismaSchema` object.
  */
-export const exportSchema = (
+export const exportSchema = async (
   filepath: string,
   filename: string,
   schema: PrismaSchema
 ) => {
   fs.writeFileSync(
     path.join(process.cwd(), filepath, `${filename}.prisma`),
-    schema.toString(),
+    (await schema.toString()),
     "utf-8"
   );
 };
