@@ -1,8 +1,9 @@
-import { createEnum } from "../../dist";
+import { createEnum } from "schemix";
 
-export default createEnum("Status", (StatusEnum) => {
+export default createEnum((StatusEnum) => {
   StatusEnum
     .addValue("PENDING")
-    .addValue("POSTED")
-    .addValue("REMOVED")
-});
+    .addValue("LIVE")
+    .addValue("DELETED")
+    .addValue("REMOVED");
+})

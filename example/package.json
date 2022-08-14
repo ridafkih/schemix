@@ -1,11 +1,15 @@
 {
   "name": "schemix-example",
   "version": "0.0.1",
-  "license": "MIT",
+  "description": "",
   "scripts": {
     "start": "ts-node ./"
   },
-  "devDependencies": {
-    "ts-node": "^10.9.1"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "schemix": "^1.1.4",
+    "ts-node": "^10.7.0"
   }
 }

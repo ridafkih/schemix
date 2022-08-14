@@ -1,3 +1,10 @@
+# Schemix Example
+
+Welcome to Schemix.
+
+When run, this example project generates the following Prisma schema. Feel free to check out, or just explore in order to gain a better grasp of how to use the project.
+
+```prisma
 datasource database {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -34,3 +41,4 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
 }
+```
