@@ -12,6 +12,8 @@
 </div>
 <hr>
 
+![example usage](https://user-images.githubusercontent.com/9158485/184518260-c6961cdd-e665-484c-ae83-e3896f604bd4.png)
+
 ## Installation
 
 To install Schemix, simply use your favourite Node.js package manager.
