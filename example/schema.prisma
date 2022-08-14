@@ -1,0 +1,28 @@
+datasource database {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Status {
+  PENDING
+  POSTED
+  REMOVED
+}
+
+model User {
+  id              String @id @default(uuid())
+  friends         User[] @relation(name: "friends")
+  friendsRelation User[] @relation(name: "friends")
+  posts           Post[]
+}
+
+model Post {
+  id       String @id @default(uuid())
+  status   Status @default(PENDING)
+  author   User   @relation(references: [id], fields: [authorId])
+  authorId String
+}

@@ -15,7 +15,7 @@ export const exportSchema = async (
   schema: PrismaSchema
 ) => {
   fs.writeFileSync(
-    path.join(process.cwd(), filepath, `${filename}.prisma`),
+    path.join(filepath, `${filename}.prisma`),
     (await schema.toString()),
     "utf-8"
   );
