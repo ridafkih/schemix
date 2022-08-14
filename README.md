@@ -5,6 +5,8 @@
   	<span>
 		<a href="#installation">Installation</a>
 		<span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+		<a href="#setup">Setup</a>
+		<span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
 		<a href="#usage">Usage</a>
 		<span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
 		<a href="#contribute">Contribute</a>
@@ -26,6 +28,37 @@ yarn install schemix
 npm install schemix
 ```
 
+## Setup
+
+You will need to create three folders that will contain your source files for your Prisma schema.
+- `enums/`
+- `mixins/`
+- `models/`
+
+Your resulting file structure for your project may end up looking like what follows.
+
+```
+project/
+├── node_modules/
+│   └── *
+├── prisma/
+│   ├── index.ts
+│   ├── schema.prisma
+│   ├── enums/
+│   │   └── Status.enum.ts
+│   ├── mixins/
+│   │   ├── DateTime.mixin.ts
+│   │   └── UUID.mixin.ts
+│   └── models/
+│       ├── Post.model.ts
+│       └── User.model.ts
+├── index.ts
+├── tsconfig.json
+└── package.json
+```
+
+Once that's set up, you can add a script to your `package.json` in your root directory for your project which runs the `prisma/index.ts` file, thus generating the `schema.prisma`. file. Any time you generate your `@prisma/client`, you should first re-run the schemix script.
+
 ## Usage
 
 You can see an example usage in the [example/](./example) folder in this repository.
@@ -38,6 +71,7 @@ You can see an example usage in the [example/](./example) folder in this reposit
 import { createSchema } from "schemix";
 
 createSchema({
+  // basePath should be a path to the folder containing models/, enums/, and mixins/.
   basePath: __dirname,
   datasource: {
     provider: "postgresql",
