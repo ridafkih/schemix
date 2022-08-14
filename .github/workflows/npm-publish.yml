@@ -20,6 +20,6 @@ jobs:
       - name: Build CLI Tool
         run: yarn build
       - name: Publish to NPM Registry
-        run: yarn publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
