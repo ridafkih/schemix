@@ -21,7 +21,7 @@
 To install Schemix, simply use your favourite Node.js package manager.
 
 ```bash
-yarn install schemix
+yarn add schemix
 ```
 
 ```bash
