@@ -7,6 +7,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator prismaThirdPartyGenerator {
+  provider               = "prisma-includes-generator"
+  seperateRelationFields = true
+}
+
 enum Status {
   PENDING
   LIVE

@@ -1,4 +1,4 @@
-import { createModel } from "schemix";
+import { createModel } from "../../dist";
 import StatusEnum from "../enums/Status.enum";
 import DateTimeMixin from "../mixins/DateTime.mixin";
 import UUIDMixin from "../mixins/UUID.mixin";

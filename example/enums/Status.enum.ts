@@ -1,4 +1,4 @@
-import { createEnum } from "schemix";
+import { createEnum } from "../../dist";
 
 export default createEnum((StatusEnum) => {
   StatusEnum
