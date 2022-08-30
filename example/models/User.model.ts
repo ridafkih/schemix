@@ -1,6 +1,5 @@
 import { createModel } from "../../dist";
 import DateTimeMixin from "../mixins/DateTime.mixin";
-import UUIDMixin from "../mixins/UUID.mixin";
 import PostModel from "./Post.model";
 
 export default createModel((UserModel) => {
