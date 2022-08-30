@@ -3,6 +3,7 @@ import { PrismaScalarField } from "@/modules/PrismaScalarField";
 import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 import {
+  CompositeIDFieldOptions,
   EnumFieldOptions,
   FieldOptions,
   RelationalFieldOptions,
@@ -76,4 +77,19 @@ export const handleEnumOptions = <T extends EnumFieldOptions>(
 
   for (const [key, value] of Object.entries(options))
     field[propertyMap[key]]?.(value);
+};
+
+export const buildCompositeId = (options: CompositeIDFieldOptions) => {
+  const fields = `[${options.fields.join(", ")}]`;
+  if (!options.map && !options.name) return `@@id(${fields})`;
+
+  const referenceArguments: [string, string][] = [["fields", fields]];
+  if (options.map) referenceArguments.push(["map", options.map]);
+  if (options.name) referenceArguments.push(["name", options.name]);
+
+  const parsedArguments: string = referenceArguments
+    .map(([property, value]) => `${property}: ${value}`)
+    .join(", ");
+
+  return `@@id(${parsedArguments})`
 };
