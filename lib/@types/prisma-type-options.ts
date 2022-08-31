@@ -161,3 +161,9 @@ export type FieldOptions =
   | DateTimeFieldOptions
   | JsonFieldOptions
   | EnumFieldOptions;
+
+export type CompositeIDFieldOptions = {
+  name?: string;
+  fields: string[];
+  map?: string;
+}

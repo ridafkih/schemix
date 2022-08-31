@@ -5,6 +5,7 @@ import { PrismaScalarField } from "@/modules/PrismaScalarField";
 import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 import {
+  buildCompositeId,
   handleEnumOptions,
   handleRelationalOptions,
   handleScalarOptions,
@@ -14,6 +15,7 @@ import { parseStringOrObject } from "@/util/parse";
 import { PrismaFieldTypeName } from "@/@types/prisma-field";
 import {
   BooleanFieldOptions,
+  CompositeIDFieldOptions,
   DateTimeFieldOptions,
   DecimalFieldOptions,
   EnumFieldOptions,
@@ -93,6 +95,11 @@ export class PrismaModel {
     options?: RelationalFieldOptions
   ) {
     return this.createRelation(fieldName, model, options);
+  }
+
+  public id(options: CompositeIDFieldOptions) {
+    this.raw(buildCompositeId(options));
+    return this;
   }
 
   public mixin(model: PrismaModel) {
