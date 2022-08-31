@@ -1,4 +1,4 @@
-import { createMixin } from "schemix";
+import { createMixin } from "../../dist";
 
 export default createMixin((DateTimeMixin) => {
   DateTimeMixin

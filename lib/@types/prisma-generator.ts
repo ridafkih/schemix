@@ -5,9 +5,9 @@ export interface PrismaGeneratorOptions {
   previewFeatures?: string[];
   engineType?: "library" | "binary";
   binaryTargets?: string[];
-  [key: string]: string | string[] | undefined;
+  [key: string]: string | string[] | boolean | undefined;
 }
 
 export type PrismaMultiGeneratorOptions = Array<
-  Omit<PrismaGeneratorOptions, "name"> & { name: string }
+  PrismaGeneratorOptions & { name: string }
 >;
