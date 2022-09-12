@@ -42,5 +42,5 @@ const getAllFilesRecursively = async (
 export const importAllFiles = async (basePath: string, folderName: string) => {
   return getAllFilesRecursively(basePath, folderName)
     .then((files) => Promise.all(files.map((fileName) => import(fileName))))
-    .catch(() => void 0);
+    .catch(console.error);
 };
