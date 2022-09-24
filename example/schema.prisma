@@ -27,6 +27,8 @@ model Post {
   text      String
   author    User     @relation(fields: [authorId], references: [email])
   authorId  String
+
+  @@map("post")
 }
 
 model User {
@@ -39,6 +41,7 @@ model User {
   email           String
   fullName        String
 
+  @@map("user")
   @@id([email])
 }
 
