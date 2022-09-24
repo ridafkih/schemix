@@ -166,4 +166,8 @@ export type CompositeIDFieldOptions = {
   name?: string;
   fields: string[];
   map?: string;
-}
+};
+
+export type TableMapOptions = {
+  name: string;
+} | string;

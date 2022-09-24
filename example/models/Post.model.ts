@@ -11,5 +11,6 @@ export default createModel((PostModel) => {
     .enum("status", StatusEnum)
     .string("text")
     .relation("author", UserModel, { fields: ["authorId"], references: ["email"] })
-    .string("authorId");
+    .string("authorId")
+    .map({ name: "post" });
 })

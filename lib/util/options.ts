@@ -6,6 +6,7 @@ import {
   CompositeIDFieldOptions,
   EnumFieldOptions,
   FieldOptions,
+  TableMapOptions,
   RelationalFieldOptions,
 } from "@/@types/prisma-type-options";
 
@@ -91,5 +92,10 @@ export const buildCompositeId = (options: CompositeIDFieldOptions) => {
     .map(([property, value]) => `${property}: ${value}`)
     .join(", ");
 
-  return `@@id(${parsedArguments})`
+  return `@@id(${parsedArguments})`;
+};
+
+export const buildTableMap = (options: TableMapOptions) => {
+  const name = typeof options === 'string' ? options : options.name;
+  return `@@map("${name}")`;
 };
