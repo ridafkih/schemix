@@ -6,7 +6,7 @@ import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 import {
   buildCompositeId,
-  buildTableMap,
+  buildModelMap,
   handleEnumOptions,
   handleRelationalOptions,
   handleScalarOptions,
@@ -24,7 +24,7 @@ import {
   FloatFieldOptions,
   IntFieldOptions,
   JsonFieldOptions,
-  TableMapOptions,
+  ModelMapOptions,
   RelationalFieldOptions,
   StringFieldOptions,
 } from "@/@types/prisma-type-options";
@@ -104,8 +104,8 @@ export class PrismaModel {
     return this;
   }
 
-  public map(options: TableMapOptions) {
-    this.raw(buildTableMap(options));
+  public map(options: ModelMapOptions) {
+    this.raw(buildModelMap(options));
     return this;
   }
 
