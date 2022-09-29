@@ -168,6 +168,16 @@ export type CompositeIDFieldOptions = {
   map?: string;
 };
 
+export type CompositeUniqueFields = string[]
+export type CompositeUniqueOptions = {
+  fields: CompositeUniqueFields;
+  map?: string;
+}
+
+export type CompositeUniqueFieldOptions = 
+  | CompositeUniqueOptions 
+  | CompositeUniqueFields;
+
 export type ModelMapOptions = {
   name: string;
 } | string;

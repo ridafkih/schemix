@@ -4,6 +4,8 @@ import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 import {
   CompositeIDFieldOptions,
+  CompositeUniqueFieldOptions,
+  CompositeUniqueOptions,
   EnumFieldOptions,
   FieldOptions,
   ModelMapOptions,
@@ -94,6 +96,25 @@ export const buildCompositeId = (options: CompositeIDFieldOptions) => {
 
   return `@@id(${parsedArguments})`;
 };
+
+const isCompositeUniqueOptions = (options: CompositeUniqueFieldOptions): options is CompositeUniqueOptions => typeof options === "object"
+export const buildCompositeUnique = (options: CompositeUniqueFieldOptions) => {
+  if (isCompositeUniqueOptions(options)) {
+    const fields = `[${options.fields.join(", ")}]`;
+    const args: string[] = [fields]
+    if (options.map) {
+      args.push(`map: ${options.map}`);
+    }
+    const parsedArguments: string = args
+    .join(", ");
+    return `@@unique(${parsedArguments})`;
+  } else {
+    return `@@unique([${options.join(", ")}])`;
+  }
+
+  
+  
+}
 
 export const buildModelMap = (options: ModelMapOptions) => {
   const name = typeof options === 'string' ? options : options.name;

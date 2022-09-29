@@ -6,6 +6,7 @@ import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 
 import {
   buildCompositeId,
+  buildCompositeUnique,
   buildModelMap,
   handleEnumOptions,
   handleRelationalOptions,
@@ -17,6 +18,7 @@ import { PrismaFieldTypeName } from "@/@types/prisma-field";
 import {
   BooleanFieldOptions,
   CompositeIDFieldOptions,
+  CompositeUniqueFieldOptions,
   DateTimeFieldOptions,
   DecimalFieldOptions,
   EnumFieldOptions,
@@ -101,6 +103,11 @@ export class PrismaModel {
 
   public id(options: CompositeIDFieldOptions) {
     this.raw(buildCompositeId(options));
+    return this;
+  }
+
+  public unique(options: CompositeUniqueFieldOptions) {
+    this.raw(buildCompositeUnique(options));
     return this;
   }
 
