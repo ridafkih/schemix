@@ -144,11 +144,13 @@ export type EnumFieldOptions = (
       default?: string;
       list?: never;
       optional?: true;
+      unique?: true;
     }
   | {
       default?: never;
       list?: true;
       optional?: never;
+      unique?: never;
     }
 ) &
   DefaultFieldOptions;

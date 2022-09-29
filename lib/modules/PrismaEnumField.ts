@@ -24,6 +24,11 @@ export class PrismaEnumField {
     return this;
   }
 
+  public setUnique() {
+    this.attributes.set("unique", "@unique");
+    return this;
+  }
+
   public setDefault(defaultValue: string) {
     this.attributes.set("default", `@default(${defaultValue})`);
     return this;
