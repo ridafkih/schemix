@@ -119,6 +119,6 @@ export const buildCompositeUnique = (options: CompositeUniqueFieldOptions) => {
 };
 
 export const buildModelMap = (options: ModelMapOptions) => {
-  const name = typeof options === 'string' ? options : options.name;
+  const name = typeof options === "string" ? options : options.name;
   return `@@map("${name}")`;
 };
