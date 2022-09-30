@@ -14,8 +14,8 @@
     "paths": {
       "@/*": ["*"]
     },
-		"types": ["node"],
-    "typeRoots": ["./lib/@types", "./lib/node_modules/@types"]
+		"types": ["node", "jest"],
+    "typeRoots": ["./lib/@types", "./node_modules/@types"]
   },
   "include": ["lib/**/*"],
   "exclude": ["node_modules"]
