@@ -5,6 +5,7 @@
     "plugin:prettier/recommended"
   ],
   "plugins": ["@typescript-eslint"],
+  "files": ["*.ts"],
   "env": {
     "browser": true,
     "es6": true,

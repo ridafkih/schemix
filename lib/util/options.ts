@@ -98,24 +98,25 @@ export const buildCompositeId = (options: CompositeIDFieldOptions) => {
   return `@@id(${parsedArguments})`;
 };
 
-const isCompositeUniqueFields = (options: CompositeUniqueFieldOptions): options is CompositeUniqueFields => Array.isArray(options)
+const isCompositeUniqueFields = (
+  options: CompositeUniqueFieldOptions
+): options is CompositeUniqueFields => Array.isArray(options);
 export const buildCompositeUnique = (options: CompositeUniqueFieldOptions) => {
   if (isCompositeUniqueFields(options)) {
     return `@@unique([${options.join(", ")}])`;
   }
-  
+
   const fields = `[${options.fields.join(", ")}]`;
-  const args: string[] = [fields]
-  
+  const args: string[] = [fields];
+
   if (options.map) {
-    args.push(`map: ${options.map}`);
+    args.push(`map: \"${options.map}\"`);
   }
-  
-  const parsedArguments: string = args
-  .join(", ");
-  
+
+  const parsedArguments: string = args.join(", ");
+
   return `@@unique(${parsedArguments})`;
-}
+};
 
 export const buildModelMap = (options: ModelMapOptions) => {
   const name = typeof options === 'string' ? options : options.name;
