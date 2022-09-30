@@ -74,6 +74,7 @@ export const handleEnumOptions = <T extends EnumFieldOptions>(
     default: "setDefault",
     optional: "setOptional",
     list: "setList",
+    unique: "setUnique",
     map: "mapTo",
     raw: "setRawAttributes",
   };
