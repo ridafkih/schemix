@@ -5,7 +5,7 @@ import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
 import {
   CompositeIDFieldOptions,
   CompositeUniqueFieldOptions,
-  CompositeUniqueOptions,
+  CompositeUniqueFields,
   EnumFieldOptions,
   FieldOptions,
   ModelMapOptions,
@@ -98,23 +98,23 @@ export const buildCompositeId = (options: CompositeIDFieldOptions) => {
   return `@@id(${parsedArguments})`;
 };
 
-const isCompositeUniqueOptions = (options: CompositeUniqueFieldOptions): options is CompositeUniqueOptions => typeof options === "object"
+const isCompositeUniqueFields = (options: CompositeUniqueFieldOptions): options is CompositeUniqueFields => Array.isArray(options)
 export const buildCompositeUnique = (options: CompositeUniqueFieldOptions) => {
-  if (isCompositeUniqueOptions(options)) {
-    const fields = `[${options.fields.join(", ")}]`;
-    const args: string[] = [fields]
-    if (options.map) {
-      args.push(`map: ${options.map}`);
-    }
-    const parsedArguments: string = args
-    .join(", ");
-    return `@@unique(${parsedArguments})`;
-  } else {
+  if (isCompositeUniqueFields(options)) {
     return `@@unique([${options.join(", ")}])`;
   }
-
   
+  const fields = `[${options.fields.join(", ")}]`;
+  const args: string[] = [fields]
   
+  if (options.map) {
+    args.push(`map: ${options.map}`);
+  }
+  
+  const parsedArguments: string = args
+  .join(", ");
+  
+  return `@@unique(${parsedArguments})`;
 }
 
 export const buildModelMap = (options: ModelMapOptions) => {
