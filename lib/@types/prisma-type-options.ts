@@ -122,6 +122,7 @@ export type JsonFieldOptions = (
 ) &
   DefaultFieldOptions;
 
+type ReferentialAction = "Cascade" | "Restrict" | "NoAction" | "SetNull" | "SetDefault";
 export type RelationalFieldOptions = (
   | {
       list?: true;
@@ -134,8 +135,8 @@ export type RelationalFieldOptions = (
 ) & {
   references?: string[];
   fields?: string[];
-  onDelete?: "Cascade" | "Restrict" | "NoAction";
-  onUpdate?: "Cascade" | "Restrict" | "NoAction";
+  onDelete?: ReferentialAction;
+  onUpdate?: ReferentialAction;
   name?: string;
 } & DefaultFieldOptions;
 
