@@ -122,7 +122,12 @@ export type JsonFieldOptions = (
 ) &
   DefaultFieldOptions;
 
-type ReferentialAction = "Cascade" | "Restrict" | "NoAction" | "SetNull" | "SetDefault";
+type ReferentialAction =
+  | "Cascade"
+  | "Restrict"
+  | "NoAction"
+  | "SetNull"
+  | "SetDefault";
 export type RelationalFieldOptions = (
   | {
       list?: true;
@@ -171,16 +176,18 @@ export type CompositeIDFieldOptions = {
   map?: string;
 };
 
-export type CompositeUniqueFields = string[]
+export type CompositeUniqueFields = string[];
 export type CompositeUniqueOptions = {
   fields: CompositeUniqueFields;
   map?: string;
-}
+};
 
-export type CompositeUniqueFieldOptions = 
-  | CompositeUniqueOptions 
+export type CompositeUniqueFieldOptions =
+  | CompositeUniqueOptions
   | CompositeUniqueFields;
 
-export type ModelMapOptions = {
-  name: string;
-} | string;
+export type ModelMapOptions =
+  | {
+      name: string;
+    }
+  | string;
