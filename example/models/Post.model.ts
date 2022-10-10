@@ -1,8 +1,8 @@
 import { createModel } from "../../dist";
+import AuthorMixin from "../mixins/Author.mixin";
 import StatusEnum from "../enums/Status.enum";
 import DateTimeMixin from "../mixins/DateTime.mixin";
 import UUIDMixin from "../mixins/UUID.mixin";
-import UserModel from "./User.model";
 
 export default createModel((PostModel) => {
   PostModel
@@ -10,7 +10,6 @@ export default createModel((PostModel) => {
     .mixin(DateTimeMixin)
     .enum("status", StatusEnum)
     .string("text")
-    .relation("author", UserModel, { fields: ["authorId"], references: ["email"] })
-    .string("authorId")
+    .mixin(AuthorMixin)
     .map({ name: "post" });
 })
