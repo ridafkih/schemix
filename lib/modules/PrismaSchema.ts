@@ -95,8 +95,8 @@ export class PrismaSchema {
   public toString(): Promise<string> {
     return new Promise(async (resolve) => {
       await importAllFiles(this.basePath, "enums");
-      await importAllFiles(this.basePath, "mixins");
       await importAllFiles(this.basePath, "models");
+      await importAllFiles(this.basePath, "mixins");
 
       setTimeout(() => {
         const models = [
