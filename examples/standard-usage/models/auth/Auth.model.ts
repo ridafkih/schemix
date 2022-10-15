@@ -1,6 +1,6 @@
-import { createModel } from "../../../dist";
+import { createModel } from "../../../../dist";
 import UUIDMixin from "../../mixins/UUID.mixin";
-import UserModel from "../../models/User.model";
+import UserModel from "../User.model";
 
 export default createModel((AuthModel) => {
   AuthModel
