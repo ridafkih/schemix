@@ -31,9 +31,10 @@ export const createSchema = <T extends CreateSchemaOptions>({
   generator,
   basePath,
 }: T): T["basePath"] extends string ? PrivateSchema : PrismaSchema => {
-  if (typeof basePath === "string")
-    return new PrismaSchema(datasource, generator, basePath);
-  else return new PrismaSchema(datasource, generator);
+  if (typeof basePath === "string") {
+    schema = new PrismaSchema(datasource, generator, basePath);
+    return schema;
+  } else return new PrismaSchema(datasource, generator);
 };
 
 export { createMixin, createEnum, createModel } from "@/util/create";
