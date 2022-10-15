@@ -38,3 +38,6 @@ export const createSchema = ({
 };
 
 export { createMixin, createEnum, createModel } from "@/util/create";
+export { PrismaModel } from "@/modules/PrismaModel";
+export { PrismaEnum } from "@/modules/PrismaEnum";
+export { PrismaSchema } from "@/modules/PrismaSchema";
