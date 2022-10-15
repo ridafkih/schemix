@@ -71,7 +71,7 @@ export class PrismaSchema {
    * @returns The `PrismaModel` object.
    */
   public createMixin() {
-    const model = new PrismaModel(this);
+    const model = new PrismaModel(null, this);
     return model;
   }
 
@@ -81,7 +81,7 @@ export class PrismaSchema {
    * @returns The `PrismaModel` object.
    */
   public createModel(modelName: string) {
-    const model = new PrismaModel(this, modelName);
+    const model = new PrismaModel(modelName, this);
     this.models.set(modelName, model);
     return model;
   }
