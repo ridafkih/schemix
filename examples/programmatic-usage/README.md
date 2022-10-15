@@ -41,4 +41,4 @@ model ExampleModel {
 }
 ```
 
-This example simply serves to prove that a purely programmatic approach to schema generation can be taken as of the release dated 15-09-2022.
+This example simply serves to prove that a purely programmatic approach to schema generation can be taken as of the release dated 15-10-2022.
