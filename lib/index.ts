@@ -30,8 +30,9 @@ export const createSchema = ({
   datasource,
   generator,
 }: CreateSchemaOptions) => {
-  schema = new PrismaSchema(basePath, datasource, generator);
+  schema = new PrismaSchema(datasource, generator, basePath);
   return schema as PrivateSchema;
 };
 
 export { createMixin, createEnum, createModel } from "@/util/create";
+export { PrismaSchema } from "@/modules/PrismaSchema";
