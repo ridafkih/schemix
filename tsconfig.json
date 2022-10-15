@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-		"downlevelIteration": true,
-		"lib": ["ES2020"],
+    "downlevelIteration": true,
+    "lib": ["ES2020"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -14,7 +14,7 @@
     "paths": {
       "@/*": ["*"]
     },
-		"types": ["node", "jest"],
+    "types": ["node", "jest"],
     "typeRoots": ["./lib/@types", "./node_modules/@types"]
   },
   "include": ["lib/**/*"],

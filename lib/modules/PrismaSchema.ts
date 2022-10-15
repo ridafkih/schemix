@@ -16,11 +16,20 @@ export class PrismaSchema {
   private models: Map<string, PrismaModel> = new Map();
 
   constructor(
-    private readonly basePath: string,
+    datasource: PrismaDataSourceOptions,
+    generator: PrismaGeneratorOptions | PrismaMultiGeneratorOptions
+  );
+  constructor(
+    datasource: PrismaDataSourceOptions,
+    generator: PrismaGeneratorOptions | PrismaMultiGeneratorOptions,
+    basePath: string
+  );
+  constructor(
     private readonly datasource: PrismaDataSourceOptions,
     private readonly generator:
       | PrismaGeneratorOptions
-      | PrismaMultiGeneratorOptions
+      | PrismaMultiGeneratorOptions,
+    private readonly basePath?: string
   ) {}
 
   /**
@@ -62,7 +71,7 @@ export class PrismaSchema {
    * @returns The `PrismaModel` object.
    */
   public createMixin() {
-    const model = new PrismaModel(this);
+    const model = new PrismaModel(null, this);
     return model;
   }
 
@@ -72,7 +81,7 @@ export class PrismaSchema {
    * @returns The `PrismaModel` object.
    */
   public createModel(modelName: string) {
-    const model = new PrismaModel(this, modelName);
+    const model = new PrismaModel(modelName, this);
     this.models.set(modelName, model);
     return model;
   }
@@ -94,9 +103,11 @@ export class PrismaSchema {
    */
   public toString(): Promise<string> {
     return new Promise(async (resolve) => {
-      await importAllFiles(this.basePath, "enums");
-      await importAllFiles(this.basePath, "models");
-      await importAllFiles(this.basePath, "mixins");
+      if (this.basePath) {
+        await importAllFiles(this.basePath, "enums");
+        await importAllFiles(this.basePath, "models");
+        await importAllFiles(this.basePath, "mixins");
+      }
 
       setTimeout(() => {
         const models = [

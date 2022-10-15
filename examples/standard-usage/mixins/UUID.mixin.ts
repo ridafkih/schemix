@@ -1,4 +1,4 @@
-import { createMixin } from "../../dist";
+import { createMixin } from "../../../dist";
 
 export default createMixin((UUIDMixin) => {
   UUIDMixin

@@ -1,4 +1,4 @@
-import { createModel } from "../../dist";
+import { createModel } from "../../../dist";
 import AuthorMixin from "../mixins/Author.mixin";
 import StatusEnum from "../enums/Status.enum";
 import DateTimeMixin from "../mixins/DateTime.mixin";

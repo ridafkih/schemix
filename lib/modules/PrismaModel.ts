@@ -40,9 +40,11 @@ export class PrismaModel {
   private blockAttributes: string[] = [];
   private rawFields: string[] = [];
 
+  constructor(name?: string | null, schema?: PrismaSchema);
+  constructor(name?: string | null);
   constructor(
-    private readonly schema: PrismaSchema,
-    public readonly name?: string
+    public readonly name?: string | null,
+    private readonly schema?: PrismaSchema
   ) {}
 
   public string(fieldName: string, options?: StringFieldOptions) {
@@ -130,7 +132,9 @@ export class PrismaModel {
   }
 
   public extend(name: string) {
-    const clone = this.schema.createModel(name);
+    const clone = this.schema
+      ? this.schema.createModel(name)
+      : new PrismaModel(name);
     clone.fields = this.fields;
     clone.rawFields = this.rawFields;
     return clone;

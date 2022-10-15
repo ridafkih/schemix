@@ -1,4 +1,4 @@
-import { createSchema } from "../dist";
+import { createSchema } from "../../dist";
 
 createSchema({
   basePath: __dirname,
