@@ -1,6 +1,6 @@
-import { PrismaEnumField } from "@/modules/PrismaEnumField";
-import { PrismaScalarField } from "@/modules/PrismaScalarField";
-import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
+import { PrismaEnumField } from "modules/PrismaEnumField";
+import { PrismaScalarField } from "modules/PrismaScalarField";
+import { PrismaRelationalField } from "modules/PrismaRelationalField";
 
 import {
   CompositeIDFieldOptions,
@@ -10,7 +10,7 @@ import {
   FieldOptions,
   ModelMapOptions,
   RelationalFieldOptions,
-} from "@/@types/prisma-type-options";
+} from "typings/prisma-type-options";
 
 /**
  * Manipulates the `PrismaScalarField` based on the options provided.

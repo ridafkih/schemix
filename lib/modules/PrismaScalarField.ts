@@ -2,7 +2,7 @@ import {
   PrismaFieldAttribute,
   PrismaFieldModifier,
   PrismaFieldTypeName,
-} from "@/@types/prisma-field";
+} from "typings/prisma-field";
 
 export class PrismaScalarField {
   private attributes: Map<string, PrismaFieldAttribute> = new Map();

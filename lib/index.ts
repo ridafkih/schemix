@@ -1,10 +1,10 @@
-import { PrismaSchema } from "@/modules/PrismaSchema";
+import { PrismaSchema } from "modules/PrismaSchema";
 
-import { PrismaDataSourceOptions } from "@/@types/prisma-datasource";
+import { PrismaDataSourceOptions } from "typings/prisma-datasource";
 import {
   PrismaGeneratorOptions,
   PrismaMultiGeneratorOptions,
-} from "@/@types/prisma-generator";
+} from "typings/prisma-generator";
 
 type PrivateSchema = Omit<
   PrismaSchema,
@@ -37,7 +37,7 @@ export const createSchema = <T extends CreateSchemaOptions>({
   } else return new PrismaSchema(datasource, generator);
 };
 
-export { createMixin, createEnum, createModel } from "@/util/create";
-export { PrismaModel } from "@/modules/PrismaModel";
-export { PrismaEnum } from "@/modules/PrismaEnum";
+export { createMixin, createEnum, createModel } from "util/create";
+export { PrismaModel } from "modules/PrismaModel";
+export { PrismaEnum } from "modules/PrismaEnum";
 export { PrismaSchema };

@@ -1,4 +1,4 @@
-import { PrismaEnumOptions } from "@/@types/prisma-enum";
+import { PrismaEnumOptions } from "typings/prisma-enum";
 
 export class PrismaEnum {
   private enumMap: Map<string, string | undefined> = new Map();

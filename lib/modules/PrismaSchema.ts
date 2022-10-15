@@ -1,15 +1,15 @@
-import { PrismaModel } from "@/modules/PrismaModel";
-import { PrismaEnum } from "@/modules/PrismaEnum";
+import { PrismaModel } from "modules/PrismaModel";
+import { PrismaEnum } from "modules/PrismaEnum";
 
-import { exportSchema } from "@/util/export";
-import { parseKeyValueBlock } from "@/util/blocks";
+import { exportSchema } from "util/export";
+import { parseKeyValueBlock } from "util/blocks";
 
-import { PrismaDataSourceOptions } from "@/@types/prisma-datasource";
+import { PrismaDataSourceOptions } from "typings/prisma-datasource";
 import {
   PrismaGeneratorOptions,
   PrismaMultiGeneratorOptions,
-} from "@/@types/prisma-generator";
-import { importAllFiles } from "@/util/import";
+} from "typings/prisma-generator";
+import { importAllFiles } from "util/import";
 
 export class PrismaSchema {
   private enums: Map<string, PrismaEnum> = new Map();

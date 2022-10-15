@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 
-import { PrismaSchema } from "@/modules/PrismaSchema";
+import { PrismaSchema } from "modules/PrismaSchema";
 
 /**
  * Exports the schema to a path relative to the current working directory.
