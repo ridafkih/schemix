@@ -26,15 +26,14 @@ export let schema: PrismaSchema | undefined;
  * @param props.basePath The base path for the schema object, optional if you want a purely programmatically generated schema.
  * @returns The generated schema object.
  */
-export const createSchema = ({
+export const createSchema = <T extends CreateSchemaOptions>({
   datasource,
   generator,
   basePath,
-}: CreateSchemaOptions) => {
-  if (!basePath) return new PrismaSchema(datasource, generator);
-
-  schema = new PrismaSchema(datasource, generator, basePath);
-  return schema as PrivateSchema;
+}: T): T["basePath"] extends string ? PrivateSchema : PrismaSchema => {
+  if (typeof basePath === "string")
+    return new PrismaSchema(datasource, generator, basePath);
+  else return new PrismaSchema(datasource, generator);
 };
 
 export { createMixin, createEnum, createModel } from "@/util/create";
