@@ -11,8 +11,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "yarn build && cd example && yarn && yarn start",
     "build": "tsc --declaration && tsc-alias",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "lint": "eslint .",
     "lint:fix": "yarn lint --fix"
   },
@@ -30,6 +31,7 @@
     "@types/node": "^17.0.31",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
+    "@vitest/coverage-c8": "^0.24.3",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -39,6 +41,8 @@
     "ts-node": "^10.7.0",
     "tsc-alias": "^1.6.7",
     "tsconfig-paths": "^3.14.1",
-    "typescript": "^4.6.4"
-  }
+    "typescript": "^4.6.4",
+    "vitest": "^0.24.3"
+  },
+  "dependencies": {}
 }

@@ -9,7 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "rootDir": "lib",
     "baseUrl": "lib",
     "paths": {
       "*": ["./*"]
@@ -17,6 +16,6 @@
     "types": ["node"],
     "typeRoots": ["lib/typings", "./node_modules/@types"]
   },
-  "include": ["lib/**/*"],
+  "include": ["lib/**/*", "tests"],
   "exclude": ["node_modules"]
 }
