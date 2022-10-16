@@ -1,4 +1,4 @@
-import { schema } from "index";
+import { schema } from "../";
 import { PrismaEnum } from "modules/PrismaEnum";
 import { PrismaModel } from "modules/PrismaModel";
 import { getCallerFileName } from "util/stack";
