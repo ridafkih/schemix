@@ -1,0 +1,128 @@
+// Vitest Snapshot v1
+
+exports[`PrismaModel > Should allow adding a composite id attribute 1`] = `
+"model User {
+  email String
+
+  @@id([email])
+}"
+`;
+
+exports[`PrismaModel > Should allow appending raw attributes 1`] = `
+"model Ambiguous {
+  id String @default(uuid()) @id
+
+  @@map(\\"normal_user\\")
+}"
+`;
+
+exports[`PrismaModel > Should allow appending raw fields 1`] = `
+"model Ambiguous {
+  id String @default(uuid()) @id
+  email String?
+}"
+`;
+
+exports[`PrismaModel > Should allow extending models 1`] = `
+"model User {
+  id          String @default(uuid()) @id
+  email       String
+  phoneNumber String
+}"
+`;
+
+exports[`PrismaModel > Should allow relations 1`] = `
+"model Post {
+  id       String  @default(uuid()) @id
+  content  String
+  author   User?   @relation(fields: [authorId], references: [id])
+  authorId String?
+}"
+`;
+
+exports[`PrismaModel > Should allow relations 2`] = `
+"model User {
+  id    String @default(uuid()) @id
+  posts Post[]
+}"
+`;
+
+exports[`PrismaModel > Should allow setting @updatedAt and @default(now()) on DateTime fields 1`] = `
+"model User {
+  id        String   @default(uuid()) @id
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}"
+`;
+
+exports[`PrismaModel > Should allow setting defaults for Json fields > model User {
+  id   String @default(uuid()) @id
+  json Json   @default("{\\"isJson\\":true}")
+} 1`] = `
+"model User {
+  id   String @default(uuid()) @id
+  json Json   @default(\\"{\\\\\\"isJson\\\\\\":true}\\")
+}"
+`;
+
+exports[`PrismaModel > Should support adding a map > model User {
+  id String @default(uuid()) @id
+
+  @@map("normal_user")
+} 1`] = `
+"model User {
+  id String @default(uuid()) @id
+
+  @@map(\\"normal_user\\")
+}"
+`;
+
+exports[`PrismaModel > Should support adding enum values 1`] = `
+"model Farm {
+  id    String @default(uuid()) @id
+  beans Beans
+}"
+`;
+
+exports[`PrismaModel > Should support adding fields 1`] = `
+"model User {
+  id    String  @default(uuid()) @id
+  email String?
+}"
+`;
+
+exports[`PrismaModel > Should support adding mixins > model User {
+  id          String @default(uuid()) @id
+  email       String
+  phoneNumber String
+} 1`] = `
+"model User {
+  id          String @default(uuid()) @id
+  email       String
+  phoneNumber String
+}"
+`;
+
+exports[`PrismaModel > Should support adding unique constraints 1`] = `
+"model User {
+  id          String @default(uuid()) @id
+  email       String
+  phoneNumber String
+
+  @@unique([email, phoneNumber])
+}"
+`;
+
+exports[`PrismaModel > Should support every scalar field type 1`] = `
+"model Model {
+  id       String   @default(uuid()) @id
+  string   String
+  int      Int
+  bigInt   BigInt
+  decimal  Decimal
+  float    Float
+  boolean  Boolean
+  dateTime DateTime
+  json     Json
+}"
+`;

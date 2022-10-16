@@ -1,8 +1,8 @@
-import { PrismaEnum } from "@/modules/PrismaEnum";
-import { PrismaSchema } from "@/modules/PrismaSchema";
-import { PrismaEnumField } from "@/modules/PrismaEnumField";
-import { PrismaScalarField } from "@/modules/PrismaScalarField";
-import { PrismaRelationalField } from "@/modules/PrismaRelationalField";
+import { PrismaEnum } from "modules/PrismaEnum";
+import { PrismaSchema } from "modules/PrismaSchema";
+import { PrismaEnumField } from "modules/PrismaEnumField";
+import { PrismaScalarField } from "modules/PrismaScalarField";
+import { PrismaRelationalField } from "modules/PrismaRelationalField";
 
 import {
   buildCompositeId,
@@ -11,10 +11,10 @@ import {
   handleEnumOptions,
   handleRelationalOptions,
   handleScalarOptions,
-} from "@/util/options";
-import { parseStringOrObject } from "@/util/parse";
+} from "util/options";
+import { parseStringOrObject } from "util/parse";
 
-import { PrismaFieldTypeName } from "@/@types/prisma-field";
+import { PrismaFieldTypeName } from "typings/prisma-field";
 import {
   BooleanFieldOptions,
   CompositeIDFieldOptions,
@@ -29,8 +29,8 @@ import {
   ModelMapOptions,
   RelationalFieldOptions,
   StringFieldOptions,
-} from "@/@types/prisma-type-options";
-import { PrismaEnumOptions } from "@/@types/prisma-enum";
+} from "typings/prisma-type-options";
+import { PrismaEnumOptions } from "typings/prisma-enum";
 
 export class PrismaModel {
   private fields: Map<

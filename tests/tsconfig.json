@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../lib",
+    "paths": {
+      "schemix/lib/*": ["./*"],
+      "schemix": ["./index"],
+    },
+  },
+}

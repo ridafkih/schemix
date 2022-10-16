@@ -9,14 +9,13 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "rootDir": "lib",
     "baseUrl": "lib",
     "paths": {
-      "@/*": ["*"]
+      "*": ["./*"]
     },
-    "types": ["node", "jest"],
-    "typeRoots": ["./lib/@types", "./node_modules/@types"]
+    "types": ["node"],
+    "typeRoots": ["lib/typings", "./node_modules/@types"]
   },
-  "include": ["lib/**/*"],
+  "include": ["lib/**/*", "tests"],
   "exclude": ["node_modules"]
 }

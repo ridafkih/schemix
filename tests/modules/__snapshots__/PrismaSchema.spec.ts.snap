@@ -1,0 +1,17 @@
+// Vitest Snapshot v1
+
+exports[`PrismaSchema > Should expect multiple generators 1`] = `
+"datasource database {
+  provider = \\"cockroachdb\\"
+  url      = env(\\"DATABASE_URL\\")
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+
+generator other {
+  provider = \\"other-client\\"
+}
+"
+`;

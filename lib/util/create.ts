@@ -1,7 +1,7 @@
-import { schema } from "@/index";
-import { PrismaEnum } from "@/modules/PrismaEnum";
-import { PrismaModel } from "@/modules/PrismaModel";
-import { getCallerFileName } from "@/util/stack";
+import { schema } from "../";
+import { PrismaEnum } from "modules/PrismaEnum";
+import { PrismaModel } from "modules/PrismaModel";
+import { getCallerFileName } from "util/stack";
 
 export function createModel(
   name: string,

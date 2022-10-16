@@ -1,0 +1,46 @@
+// Vitest Snapshot v1
+
+exports[`PrismaEnumField > Should support creating each type of field 1`] = `
+[
+  [
+    "bigint",
+    "BigInt",
+    "",
+  ],
+  [
+    "boolean",
+    "Boolean",
+    "",
+  ],
+  [
+    "datetime",
+    "DateTime",
+    "",
+  ],
+  [
+    "decimal",
+    "Decimal",
+    "",
+  ],
+  [
+    "float",
+    "Float",
+    "",
+  ],
+  [
+    "int",
+    "Int",
+    "",
+  ],
+  [
+    "json",
+    "Json",
+    "",
+  ],
+  [
+    "string",
+    "String",
+    "",
+  ],
+]
+`;

@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`PrismaEnum > Should support adding enum values 1`] = `
+"enum Avengers {
+  THOR
+  IRON_MAN
+  CAPTAIN_AMERICA
+  BLACK_WIDOW
+  HULK
+}"
+`;
