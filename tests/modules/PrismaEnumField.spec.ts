@@ -43,7 +43,7 @@ describe("PrismaEnumField", () => {
     const field = new PrismaEnumField("points", "Int").setUnique();
     expect(field.toTokenArray()).includes("@unique");
   });
-  it("Should support setting raw attributes.", () => {
+  it("Should support setting raw attributes", () => {
     const field = new PrismaEnumField("points", "Int").setRawAttributes(
       "@database.VarChar(255)"
     );
