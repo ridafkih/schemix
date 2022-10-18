@@ -20,13 +20,13 @@ export function createModel(
 
   if (typeof param1 === "string" && typeof param2 === "function") {
     const model = schema.createModel(param1);
-    setTimeout(param2, 0, model);
+    setImmediate(param2, model);
     return model;
   }
 
   if (typeof param1 === "function" && !param2) {
     const model = schema.createModel(getCallerFileName());
-    setTimeout(param1, 0, model);
+    setImmediate(param1, model);
     return model;
   }
 }
@@ -46,13 +46,13 @@ export function createEnum(
 
   if (typeof param1 === "string" && typeof param2 === "function") {
     const model = schema.createEnum(param1);
-    setTimeout(param2, 0, model);
+    setImmediate(param2, model);
     return model;
   }
 
   if (typeof param1 === "function" && !param2) {
     const model = schema.createEnum(getCallerFileName());
-    setTimeout(param1, 0, model);
+    setImmediate(param1, model);
     return model;
   }
 }
@@ -63,6 +63,6 @@ export function createMixin(
   if (!schema) throw Error("Schema was not initialized.");
 
   const model = schema.createMixin();
-  setTimeout(callback, 0, model);
+  process.nextTick(callback, model);
   return model;
 }

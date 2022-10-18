@@ -109,7 +109,7 @@ export class PrismaSchema {
         await importAllFiles(this.basePath, "mixins");
       }
 
-      setTimeout(() => {
+      process.nextTick(() => {
         const models = [
           this.parseDataSource(),
           this.parseGenerator(),
@@ -121,7 +121,7 @@ export class PrismaSchema {
           models.map((model) => model.toString()).join("\n\n") + "\n";
 
         resolve(schemaString);
-      }, 0);
+      });
     });
   }
 

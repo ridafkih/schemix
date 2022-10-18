@@ -119,9 +119,12 @@ export class PrismaModel {
   }
 
   public mixin(model: PrismaModel) {
-    [...model.fields.entries()].map(([key, value]) =>
-      this.fields.set(key, value)
-    );
+    setImmediate(() => {
+      [...model.fields.entries()].map(([key, value]) =>
+        this.fields.set(key, value)
+      );
+    });
+
     return this;
   }
 
