@@ -39,8 +39,22 @@ const getAllFilesRecursively = async (
   return [...filesInDirectories, ...files];
 };
 
+const importFilteredFiles = (filePaths: string[]): Promise<unknown>[] => {
+  return filePaths.reduce((accumulator: Promise<unknown>[], filePath) => {
+    if (
+      filePath.endsWith(".d.ts.map") ||
+      filePath.endsWith(".d.ts") ||
+      filePath.endsWith(".js.map")
+    )
+      return accumulator;
+
+    accumulator.push(import(filePath));
+    return accumulator;
+  }, []);
+};
+
 export const importAllFiles = async (basePath: string, folderName: string) => {
   return getAllFilesRecursively(basePath, folderName)
-    .then((files) => Promise.all(files.map((fileName) => import(fileName))))
+    .then((files) => Promise.all(importFilteredFiles(files)))
     .catch(console.error);
 };
