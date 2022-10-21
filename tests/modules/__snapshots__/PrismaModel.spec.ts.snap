@@ -94,6 +94,18 @@ exports[`PrismaModel > Should support adding fields 1`] = `
 exports[`PrismaModel > Should support adding mixins > model User {
   email       String
   phoneNumber String
+  id          String @default(uuid()) @id
+} 1`] = `
+"model User {
+  email       String
+  phoneNumber String
+  id          String @default(uuid()) @id
+}"
+`;
+
+exports[`PrismaModel > Should support adding mixins > model User {
+  email       String
+  phoneNumber String
 } 1`] = `
 "model User {
   email       String

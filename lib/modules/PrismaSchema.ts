@@ -117,10 +117,12 @@ export class PrismaSchema {
           ...this.models.values(),
         ];
 
-        const schemaString =
-          models.map((model) => model.toString()).join("\n\n") + "\n";
-
-        resolve(schemaString);
+        Promise.all(models.map((model) => model.toString())).then(
+          (stringModels) => {
+            const schemaString = stringModels.join("\n\n") + "\n";
+            resolve(schemaString);
+          }
+        );
       });
     });
   }
