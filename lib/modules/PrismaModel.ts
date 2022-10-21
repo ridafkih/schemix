@@ -143,8 +143,12 @@ export class PrismaModel {
     return clone;
   }
 
-  public toString() {
-    return [`model ${this.name} {`, this.parseFields(), "}"].join("\n");
+  public toString(): Promise<string> {
+    return new Promise((resolve) => {
+      setImmediate(() => {
+        resolve([`model ${this.name} {`, this.parseFields(), "}"].join("\n"));
+      });
+    });
   }
 
   private createRelation(

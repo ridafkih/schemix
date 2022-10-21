@@ -25,9 +25,11 @@ export default route({
         model[type](name);
       }
 
+      const asString = await model.toString();
+      
       return {
         status: 200,
-        body: model.toString(),
+        body: asString,
       };
     },
   },
