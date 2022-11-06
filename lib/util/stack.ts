@@ -10,7 +10,7 @@ export const getCallerFileName = () => {
   const { stack } = grabber;
   Grabber.prepareStackTrace = undefined;
 
-  const pathSegments = stack?.[2].getFileName().split("/");
+  const pathSegments = stack?.[2].getFileName().split(/[/\\]/);
   const [fileName] = pathSegments[pathSegments.length - 1].split(".");
 
   return fileName;
