@@ -159,7 +159,7 @@ export class PrismaModel {
     if (!model.name) return this;
     const field = new PrismaRelationalField(fieldName, model.name);
     handleRelationalOptions(field, options);
-    this.fields.set(fieldName, field);
+    setImmediate(() => this.fields.set(fieldName, field));
     return this;
   }
 
@@ -170,7 +170,7 @@ export class PrismaModel {
   ) {
     const field = new PrismaEnumField(fieldName, type);
     handleEnumOptions(field, options);
-    this.fields.set(fieldName, field);
+    setImmediate(() => this.fields.set(fieldName, field));
     return this;
   }
 
@@ -181,7 +181,7 @@ export class PrismaModel {
   ) {
     const field = new PrismaScalarField(fieldName, type);
     handleScalarOptions(field, options);
-    this.fields.set(fieldName, field);
+    setImmediate(() => this.fields.set(fieldName, field));
     return this;
   }
 
