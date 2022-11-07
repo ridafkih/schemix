@@ -10,14 +10,15 @@ export class PrismaEnum {
     return this;
   }
 
-  public fromJSEnum<T extends Enum<T>>(
-    enumLike: T,
-    options?: PrismaEnumOptions
-  ) {
-    const values = Object.values(enumLike);
-    values.forEach((value) => {
-      this.enumMap.set(value, options?.map);
+  public fromJSEnum<T extends Enum<T>>(enumLike: T) {
+    const values = Object.entries(enumLike);
+
+    values.forEach(([key, value]) => {
+      if (!isNaN(parseInt(key))) return;
+      const mapValue = typeof value === "string" ? value : undefined;
+      this.enumMap.set(key, mapValue);
     });
+
     return this;
   }
 
