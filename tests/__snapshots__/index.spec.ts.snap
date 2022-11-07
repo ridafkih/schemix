@@ -17,19 +17,19 @@ enum UserStatus {
 }
 
 model Post {
-  content   String
-  deleted   Boolean
   id        String   @default(uuid()) @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  content   String
+  deleted   Boolean
 }
 
 model User {
-  status    UserStatus
-  posts     Post[]
   id        String     @default(uuid()) @id
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  status    UserStatus
+  posts     Post[]
 }
 "
 `;
