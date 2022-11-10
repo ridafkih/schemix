@@ -126,6 +126,19 @@ describe("PrismaModel", () => {
     const asString = await model.toString();
     expect(asString).toMatchSnapshot(asString);
   });
+  it("Should support using raw fields with mixins", async () => {
+    const emailMixin = new PrismaModel()
+      .string("email")
+      .raw("@@index([email])");
+
+    const model = new PrismaModel("User")
+      .string("id", { default: { uuid: true }, id: true })
+      .mixin(emailMixin)
+      .string("phoneNumber");
+
+    const asString = await model.toString();
+    expect(asString).toMatchSnapshot();
+  });
   it("Should allow extending models", async () => {
     const base = new PrismaModel().string("id", {
       default: { uuid: true },
