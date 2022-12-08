@@ -2,7 +2,7 @@ import { PrismaSchema } from "schemix/lib/index";
 import { describe, expect, it } from "vitest";
 
 describe("PrismaSchema", () => {
-  it("Should expect multiple generators", async () => {
+  it("Should accept multiple generators", async () => {
     const schema = new PrismaSchema(
       {
         provider: "cockroachdb",
@@ -18,6 +18,21 @@ describe("PrismaSchema", () => {
           name: "other",
         },
       ]
+    );
+
+    const asString = await schema.toString();
+    expect(asString).toMatchSnapshot();
+  });
+  it("Should accept extensions", async () => {
+    const schema = new PrismaSchema(
+      {
+        provider: "postgresql",
+        url: { env: "DATABASE_URL" },
+        extensions: ["pg_tgrm", "zombodb"],
+      },
+      {
+        provider: "prisma-client-js",
+      }
     );
 
     const asString = await schema.toString();

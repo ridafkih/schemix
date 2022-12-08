@@ -20,5 +20,6 @@ export interface PrismaDataSourceOptions {
     | {
         env: string;
       };
+  extensions?: string[];
   referentialIntegrity?: PrismaDataSourceReferentialIntegrity;
 }
