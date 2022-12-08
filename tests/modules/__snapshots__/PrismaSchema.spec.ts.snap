@@ -1,6 +1,19 @@
 // Vitest Snapshot v1
 
-exports[`PrismaSchema > Should expect multiple generators 1`] = `
+exports[`PrismaSchema > Should accept extensions 1`] = `
+"datasource database {
+  provider   = \\"postgresql\\"
+  url        = env(\\"DATABASE_URL\\")
+  extensions = [\\"pg_tgrm\\",\\"zombodb\\"]
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+"
+`;
+
+exports[`PrismaSchema > Should accept multiple generators 1`] = `
 "datasource database {
   provider = \\"cockroachdb\\"
   url      = env(\\"DATABASE_URL\\")
