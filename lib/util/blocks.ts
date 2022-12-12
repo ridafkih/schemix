@@ -17,6 +17,10 @@ export const parseKeyValueBlock = (
         return `  ${key.padEnd(tokenPadding)} = env("${value.env}")`;
       }
 
+      if (key === "extensions" && Array.isArray(value)) {
+        return `  ${key.padEnd(tokenPadding)} = [${value.join(", ")}]`;
+      }
+
       return typeof value === "string"
         ? `  ${key.padEnd(tokenPadding)} = "${value}"`
         : `  ${key.padEnd(tokenPadding)} = ${JSON.stringify(value)}`;

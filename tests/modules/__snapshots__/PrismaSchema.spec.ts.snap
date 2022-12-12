@@ -4,7 +4,7 @@ exports[`PrismaSchema > Should accept extensions 1`] = `
 "datasource database {
   provider   = \\"postgresql\\"
   url        = env(\\"DATABASE_URL\\")
-  extensions = [\\"pg_tgrm\\",\\"zombodb\\"]
+  extensions = [pg_tgrm, zombodb]
 }
 
 generator client {
