@@ -65,6 +65,16 @@ exports[`PrismaModel > Should allow setting defaults for Json fields > model Use
 }"
 `;
 
+exports[`PrismaModel > Should allow setting precision of decimals through the precision option on the field 1`] = `
+"model User {
+  id        String   @default(uuid()) @id
+  longitude Decimal  @database.Decimal(10, 8)
+  latitude  Decimal  @database.Decimal(10, 8)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}"
+`;
+
 exports[`PrismaModel > Should support adding a map > model User {
   id String @default(uuid()) @id
 

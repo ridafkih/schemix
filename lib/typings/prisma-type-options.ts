@@ -75,12 +75,14 @@ export type FloatFieldOptions = (
 
 export type DecimalFieldOptions = (
   | {
+      precision?: [number, number];
       default?: number;
       optional?: true;
       unique?: true;
       list?: never;
     }
   | {
+      precision?: [number, number];
       default?: never;
       optional?: never;
       unique?: never;
