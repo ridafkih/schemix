@@ -38,4 +38,19 @@ describe("PrismaSchema", () => {
     const asString = await schema.toString();
     expect(asString).toMatchSnapshot();
   });
+  it("Should support shadowDatabaseUrl with environment variables", async () => {
+    const schema = new PrismaSchema(
+      {
+        provider: "postgresql",
+        url: { env: "DATABASE_URL" },
+        shadowDatabaseUrl: { env: "SHADOW_DATABASE_URL" },
+      },
+      {
+        provider: "prisma-client-js",
+      }
+    );
+
+    const asString = await schema.toString();
+    expect(asString).toMatchSnapshot();
+  });
 });

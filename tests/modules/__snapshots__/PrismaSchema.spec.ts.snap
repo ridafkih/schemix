@@ -28,3 +28,16 @@ generator other {
 }
 "
 `;
+
+exports[`PrismaSchema > Should support shadowDatabaseUrl with environment variables 1`] = `
+"datasource database {
+  provider          = \\"postgresql\\"
+  url               = env(\\"DATABASE_URL\\")
+  shadowDatabaseUrl = env(\\"SHADOW_DATABASE_URL\\")
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+"
+`;
