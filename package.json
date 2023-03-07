@@ -23,7 +23,7 @@
     "mix"
   ],
   "author": "Rida F'kih",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.19.3",
