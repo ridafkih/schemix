@@ -60,6 +60,12 @@ export class PrismaModel {
   }
 
   public decimal(fieldName: string, options?: DecimalFieldOptions) {
+    if (options?.precision) {
+      const rawAttributes = options.raw?.split(" ") ?? [];
+      rawAttributes?.push(`@database.Decimal(${options.precision.join(", ")})`);
+      options.raw = rawAttributes.join(" ");
+    }
+
     return this.createField(fieldName, "Decimal", options);
   }
 

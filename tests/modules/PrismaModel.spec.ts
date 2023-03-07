@@ -76,6 +76,17 @@ describe("PrismaModel", () => {
     const asString = await model.toString();
     expect(asString).toMatchSnapshot();
   });
+  it("Should allow setting precision of decimals through the precision option on the field", async () => {
+    const model = new PrismaModel("User")
+      .string("id", { default: { uuid: true }, id: true })
+      .decimal("longitude", { precision: [10, 8] })
+      .decimal("latitude", { precision: [10, 8] })
+      .dateTime("updatedAt", { updatedAt: true })
+      .dateTime("createdAt", { default: { now: true } });
+
+    const asString = await model.toString();
+    expect(asString).toMatchSnapshot();
+  });
   it("Should allow setting defaults for Json fields", async () => {
     const model = new PrismaModel("User")
       .string("id", { default: { uuid: true }, id: true })

@@ -21,6 +21,7 @@ export const handleScalarOptions = <T extends FieldOptions>(
   field: PrismaScalarField,
   options: T
 ) => {
+  const keyBlacklist: string[] = ["precision"];
   const propertyMap: Record<string, keyof PrismaScalarField> = {
     id: "setAsId",
     optional: "setOptional",
@@ -32,8 +33,9 @@ export const handleScalarOptions = <T extends FieldOptions>(
     raw: "setRawAttributes",
   };
 
-  for (const [key, value] of Object.entries(options))
-    field[propertyMap[key]](value);
+  for (const [key, value] of Object.entries(options)) {
+    if (!keyBlacklist.includes(key)) field[propertyMap[key]](value);
+  }
 };
 
 /**
