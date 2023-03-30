@@ -31,6 +31,7 @@ npm install schemix
 ## Setup
 
 You will need to create three folders that will contain your source files for your Prisma schema.
+
 - `enums/`
 - `mixins/`
 - `models/`
@@ -94,8 +95,7 @@ import PostModel from "./Post.model";
 import UUIDMixin from "../mixins/UUID.mixin";
 
 export default createModel((UserModel) => {
-  UserModel
-    .mixin(UUIDMixin)
+  UserModel.mixin(UUIDMixin)
     .relation("friends", UserModel, { list: true, name: "friends" })
     .relation("friendsRelation", UserModel, { list: true, name: "friends" })
     .relation("posts", PostModel, { list: true });
@@ -117,11 +117,28 @@ import PostModel from "./Post.model";
 import UUIDMixin from "../mixins/UUID.mixin";
 
 export default createModel("UserModel", (UserModel) => {
-  UserModel
-    .mixin(UUIDMixin)
+  UserModel.mixin(UUIDMixin)
     .relation("friends", UserModel, { list: true, name: "friends" })
     .relation("friendsRelation", UserModel, { list: true, name: "friends" })
     .relation("posts", PostModel, { list: true });
+});
+```
+
+### Extending Models
+
+Sometimes one model is derivative of another, and the extension feature can be quite useful for this.
+
+If we want to extend the PostModel to create an ImagePostModel which has all its old properties but with an `imageUrl` string column, we can do so without having to re-write every single other attribute.
+
+```ts
+// ./models/ImagePostModel.model.ts
+
+import { extendModel } from "schemix";
+
+import PostModel from "./Post.model";
+
+export default extendModel(PostModel, (ImagePostModel) => {
+  ImagePostModel.string("imageUrl");
 });
 ```
 
