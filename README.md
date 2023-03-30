@@ -131,7 +131,7 @@ Sometimes one model is derivative of another, and the extension feature can be q
 If we want to extend the PostModel to create an ImagePostModel which has all its old properties but with an `imageUrl` string column, we can do so without having to re-write every single other attribute.
 
 ```ts
-// ./models/ImagePostModel.model.ts
+// ./models/ImagePost.model.ts
 
 import { extendModel } from "schemix";
 
