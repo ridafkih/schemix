@@ -38,6 +38,7 @@ export const createSchema = <T extends CreateSchemaOptions>({
 };
 
 export { createMixin, createEnum, createModel } from "util/create";
+export { extendModel } from "util/extend";
 export { PrismaModel } from "modules/PrismaModel";
 export { PrismaEnum } from "modules/PrismaEnum";
 export { PrismaSchema };
