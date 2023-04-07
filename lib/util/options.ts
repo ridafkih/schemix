@@ -31,6 +31,7 @@ export const handleScalarOptions = <T extends FieldOptions>(
     map: "mapTo",
     updatedAt: "setToUpdatedAt",
     raw: "setRawAttributes",
+    comments: "setComments",
   };
 
   for (const [key, value] of Object.entries(options)) {
@@ -57,6 +58,7 @@ export const handleRelationalOptions = <T extends RelationalFieldOptions>(
     onDelete: "setOnDelete",
     onUpdate: "setOnUpdate",
     raw: "setRawAttributes",
+    comments: "setComments",
   };
 
   for (const [key, value] of Object.entries(options))
@@ -79,6 +81,7 @@ export const handleEnumOptions = <T extends EnumFieldOptions>(
     unique: "setUnique",
     map: "mapTo",
     raw: "setRawAttributes",
+    comments: "setComments",
   };
 
   for (const [key, value] of Object.entries(options))

@@ -29,6 +29,7 @@ import {
   ModelMapOptions,
   RelationalFieldOptions,
   StringFieldOptions,
+  Comment,
 } from "typings/prisma-type-options";
 import { PrismaEnumOptions } from "typings/prisma-enum";
 
@@ -39,6 +40,7 @@ export class PrismaModel {
   > = new Map();
   private blockAttributes: string[] = [];
   private rawFields: string[] = [];
+  private comments: Comment[] = [];
 
   constructor(name?: string | null, schema?: PrismaSchema);
   constructor(name?: string | null);
@@ -46,6 +48,11 @@ export class PrismaModel {
     public readonly name?: string | null,
     private readonly schema?: PrismaSchema
   ) {}
+
+  public comment(...comments: Comment[]) {
+    this.comments.push(...comments);
+    return this;
+  }
 
   public string(fieldName: string, options?: StringFieldOptions) {
     return this.createField(fieldName, "String", options);
@@ -154,7 +161,14 @@ export class PrismaModel {
   public toString(): Promise<string> {
     return new Promise((resolve) => {
       setImmediate(() => {
-        resolve([`model ${this.name} {`, this.parseFields(), "}"].join("\n"));
+        resolve(
+          [
+            ...this.comments,
+            `model ${this.name} {`,
+            this.parseFields(),
+            "}",
+          ].join("\n")
+        );
       });
     });
   }
@@ -195,27 +209,29 @@ export class PrismaModel {
 
   private parseFields() {
     const fields = [...this.fields.values()].map((field) =>
-      field.toTokenArray()
+      field.toFieldData()
     );
-    const mostTokens = Math.max(...fields.map(({ length }) => length));
+
+    const mostTokens = Math.max(...fields.map(({ tokens }) => tokens.length));
     const paddings = Array(mostTokens).fill(0);
 
     for (let i = 0; i < mostTokens; i++)
-      for (const tokens of fields)
+      for (const { tokens } of fields)
         if (!tokens[i]) continue;
         else
           paddings[i] =
             tokens[i].length > paddings[i] ? tokens[i].length : paddings[i];
 
     return [
-      ...fields.map((tokens) => {
-        return (
+      ...fields.map(({ tokens, comments }) => {
+        return [
+          ...comments.map((comment) => "  " + comment),
           "  " +
-          tokens
-            .map((token, index) => token.padEnd(paddings[index]))
-            .join(" ")
-            .trim()
-        );
+            tokens
+              .map((token, index) => token.padEnd(paddings[index]))
+              .join(" ")
+              .trim(),
+        ].join("\n");
       }),
       ...this.rawFields.map((rawField) => "  " + rawField),
       ...(this.blockAttributes.length

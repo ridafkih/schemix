@@ -3,12 +3,14 @@ import {
   PrismaFieldModifier,
   PrismaFieldTypeName,
 } from "typings/prisma-field";
+import { Comment } from "typings/prisma-type-options";
 
 export class PrismaRelationalField {
   private relationAttributes: Map<string, string> = new Map();
   private attributes: Map<string, PrismaFieldAttribute> = new Map();
   private modifier: PrismaFieldModifier = "";
   private rawAttributeString = "";
+  private comments: Comment[] = [];
 
   constructor(
     private readonly name: string,
@@ -67,6 +69,18 @@ export class PrismaRelationalField {
   public setRawAttributes(rawAttributeString: string) {
     this.rawAttributeString = rawAttributeString;
     return this;
+  }
+
+  public setComments(comments: Comment[]) {
+    this.comments = comments;
+    return this;
+  }
+
+  public toFieldData() {
+    return {
+      comments: this.comments,
+      tokens: this.toTokenArray(),
+    };
   }
 
   public toTokenArray() {
