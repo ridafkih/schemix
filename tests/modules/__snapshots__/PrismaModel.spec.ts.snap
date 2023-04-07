@@ -23,6 +23,36 @@ exports[`PrismaModel > Should allow appending raw fields 1`] = `
 }"
 `;
 
+exports[`PrismaModel > Should allow comments on Models and Fields 1`] = `
+"// This is a comment on the Post model
+/// @ObjectType()
+model Post {
+  // This is a comment on the id field
+  /// @Field()
+  id       String  @id @default(uuid())
+  /// @Field()
+  content  String
+  /// @Field(() => User)
+  author   User?   @relation(fields: [authorId], references: [id])
+  /// @Field(() => ID)
+  authorId String?
+  /// @Field(() => Beans)
+  beans    Beans
+}"
+`;
+
+exports[`PrismaModel > Should allow comments on Models and Fields 2`] = `
+"// This is a comment on the User model
+/// @ObjectType()
+model User {
+  // This is a comment on the id field
+  /// @Field()
+  id    String @id @default(uuid())
+  /// @Field(() => [Post])
+  posts Post[]
+}"
+`;
+
 exports[`PrismaModel > Should allow extending models 1`] = `
 "model User {
   id          String @default(uuid()) @id

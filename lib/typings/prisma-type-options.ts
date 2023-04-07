@@ -1,6 +1,10 @@
-type DefaultFieldOptions = {
+export type CommentTypes = "///" | "//";
+export type Comment = `${CommentTypes} ${string}`;
+
+export type DefaultFieldOptions = {
   map?: string;
   raw?: string;
+  comments?: Comment[];
 };
 
 export type StringFieldOptions = (

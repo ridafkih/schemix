@@ -13,7 +13,7 @@
     "paths": {
       "*": ["./*"]
     },
-    "types": ["node"],
+    "types": ["@types/node"],
     "typeRoots": ["lib/typings", "./node_modules/@types"]
   },
   "include": ["lib/**/*"],

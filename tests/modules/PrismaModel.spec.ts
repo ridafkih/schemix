@@ -184,4 +184,68 @@ describe("PrismaModel", () => {
     expect(postModelAsString).toMatchSnapshot();
     expect(userModelAsString).toMatchSnapshot();
   });
+
+  it("Should allow comments on Models and Fields", async () => {
+    const postModel = new PrismaModel("Post");
+    const userModel = new PrismaModel("User");
+
+    const enumValues = new PrismaEnum("Beans")
+      .addValue("GREEN")
+      .addValue("NOT_GREEN");
+
+    postModel
+      .comment(
+        "// This is a comment on the Post model",
+        "/// @ObjectType()",
+      )
+
+      .string("id", {
+        id: true,
+        default: { uuid: true }, 
+        comments: [
+          "// This is a comment on the id field",
+          "/// @Field()",
+        ],
+      })
+
+      .string("content", { comments: ["/// @Field()"] })
+      .relation("author", userModel, {
+        fields: ["authorId"],
+        references: ["id"],
+        optional: true,
+        comments: ["/// @Field(() => User)"],
+      })
+
+      .string("authorId", {
+        optional: true,
+        comments: ["/// @Field(() => ID)"],
+      })
+
+      .enum("beans", enumValues, {
+        comments: ["/// @Field(() => Beans)"],
+      });
+
+    userModel
+      .comment("// This is a comment on the User model")
+      .comment("/// @ObjectType()")
+      .string("id", { 
+        id: true,
+        default: { uuid: true },
+        comments: [
+          "// This is a comment on the id field",
+          "/// @Field()",
+        ],
+      })
+
+      .relation("posts", postModel, {
+        list: true,
+        comments: ["/// @Field(() => [Post])"],
+      });
+
+    const postModelAsString = await postModel.toString();
+    const userModelAsString = await userModel.toString();
+
+    expect(postModelAsString).toMatchSnapshot();
+    expect(userModelAsString).toMatchSnapshot();
+  });
 });
