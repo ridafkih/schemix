@@ -1,11 +1,8 @@
 export type CommentTypes = "///" | "//";
 export type Comment = `${CommentTypes} ${string}`;
 
-export type CommentsOnFieldOptions = {
-  comments?: Comment[];
-};
-
 export type DefaultFieldOptions = {
+  comments?: Comment[];
   map?: string;
   raw?: string;
 };
@@ -37,8 +34,7 @@ export type StringFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions &
-  CommentsOnFieldOptions;
+  DefaultFieldOptions;
 
 export type IntFieldOptions = (
   | {
@@ -63,8 +59,7 @@ export type IntFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions &
-  CommentsOnFieldOptions;
+  DefaultFieldOptions;
 
 export type FloatFieldOptions = (
   | {
@@ -80,8 +75,7 @@ export type FloatFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions &
-  CommentsOnFieldOptions;
+  DefaultFieldOptions;
 
 export type DecimalFieldOptions = (
   | {
@@ -99,8 +93,7 @@ export type DecimalFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions &
-  CommentsOnFieldOptions;
+  DefaultFieldOptions;
 
 export type BooleanFieldOptions = (
   | {
@@ -113,7 +106,8 @@ export type BooleanFieldOptions = (
       optional?: never;
       list?: true;
     }
-) & { map?: string } & CommentsOnFieldOptions;
+) &
+  DefaultFieldOptions;
 
 export type DateTimeFieldOptions = {
   default?: { now: true };
@@ -133,8 +127,7 @@ export type JsonFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions &
-  CommentsOnFieldOptions;
+  DefaultFieldOptions;
 
 type ReferentialAction =
   | "Cascade"
@@ -157,8 +150,7 @@ export type RelationalFieldOptions = (
   onDelete?: ReferentialAction;
   onUpdate?: ReferentialAction;
   name?: string;
-} & DefaultFieldOptions &
-  CommentsOnFieldOptions;
+} & DefaultFieldOptions;
 
 export type EnumFieldOptions = (
   | {
@@ -174,8 +166,7 @@ export type EnumFieldOptions = (
       unique?: never;
     }
 ) &
-  DefaultFieldOptions &
-  CommentsOnFieldOptions;
+  DefaultFieldOptions;
 
 export type FieldOptions =
   | StringFieldOptions
