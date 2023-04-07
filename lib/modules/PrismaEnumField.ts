@@ -45,7 +45,7 @@ export class PrismaEnumField {
     this.rawAttributeString = rawAttributeString;
     return this;
   }
-  
+
   public setComments(comments: Comment[]) {
     this.comments = comments;
     return this;

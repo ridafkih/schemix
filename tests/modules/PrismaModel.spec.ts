@@ -194,18 +194,12 @@ describe("PrismaModel", () => {
       .addValue("NOT_GREEN");
 
     postModel
-      .comment(
-        "// This is a comment on the Post model",
-        "/// @ObjectType()",
-      )
+      .comment("// This is a comment on the Post model", "/// @ObjectType()")
 
       .string("id", {
         id: true,
-        default: { uuid: true }, 
-        comments: [
-          "// This is a comment on the id field",
-          "/// @Field()",
-        ],
+        default: { uuid: true },
+        comments: ["// This is a comment on the id field", "/// @Field()"],
       })
 
       .string("content", { comments: ["/// @Field()"] })
@@ -228,13 +222,10 @@ describe("PrismaModel", () => {
     userModel
       .comment("// This is a comment on the User model")
       .comment("/// @ObjectType()")
-      .string("id", { 
+      .string("id", {
         id: true,
         default: { uuid: true },
-        comments: [
-          "// This is a comment on the id field",
-          "/// @Field()",
-        ],
+        comments: ["// This is a comment on the id field", "/// @Field()"],
       })
 
       .relation("posts", postModel, {
@@ -255,10 +246,7 @@ describe("PrismaModel", () => {
       .string("id", {
         id: true,
         default: { uuid: true },
-        comments: [
-          "// This is a comment on the id field",
-          "/// @Field()",
-        ],
+        comments: ["// This is a comment on the id field", "/// @Field()"],
       });
 
     const model = new PrismaModel("User")
