@@ -248,4 +248,26 @@ describe("PrismaModel", () => {
     expect(postModelAsString).toMatchSnapshot();
     expect(userModelAsString).toMatchSnapshot();
   });
+
+  it("Should inherit comments from mixins", async () => {
+    const uuidMixin = new PrismaModel()
+      .comment("// This is a comment on the mixin")
+      .string("id", {
+        id: true,
+        default: { uuid: true },
+        comments: [
+          "// This is a comment on the id field",
+          "/// @Field()",
+        ],
+      });
+
+    const model = new PrismaModel("User")
+      .mixin(uuidMixin)
+      .comment("// This is a comment on the User model")
+      .string("email")
+      .string("phoneNumber");
+
+    const asString = await model.toString();
+    expect(asString).toMatchSnapshot(asString);
+  });
 });

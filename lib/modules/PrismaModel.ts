@@ -136,6 +136,8 @@ export class PrismaModel {
       [...model.fields.entries()].map(([key, value]) =>
         this.fields.set(key, value)
       );
+
+      this.comments.push(...model.comments);
       this.rawFields.push(...model.rawFields);
       this.blockAttributes.push(...model.blockAttributes);
     });

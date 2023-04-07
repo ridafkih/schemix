@@ -105,6 +105,26 @@ exports[`PrismaModel > Should allow setting precision of decimals through the pr
 }"
 `;
 
+exports[`PrismaModel > Should inherit comments from mixins > // This is a comment on the User model
+// This is a comment on the mixin
+model User {
+  // This is a comment on the id field
+  /// @Field()
+  id          String @id @default(uuid())
+  email       String
+  phoneNumber String
+} 1`] = `
+"// This is a comment on the User model
+// This is a comment on the mixin
+model User {
+  // This is a comment on the id field
+  /// @Field()
+  id          String @id @default(uuid())
+  email       String
+  phoneNumber String
+}"
+`;
+
 exports[`PrismaModel > Should support adding a map > model User {
   id String @default(uuid()) @id
 
