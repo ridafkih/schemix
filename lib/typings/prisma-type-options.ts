@@ -1,10 +1,13 @@
 export type CommentTypes = "///" | "//";
 export type Comment = `${CommentTypes} ${string}`;
 
+export type CommentsOnFieldOptions = {
+  comments?: Comment[];
+};
+
 export type DefaultFieldOptions = {
   map?: string;
   raw?: string;
-  comments?: Comment[];
 };
 
 export type StringFieldOptions = (
@@ -34,7 +37,8 @@ export type StringFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions;
+  DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 export type IntFieldOptions = (
   | {
@@ -59,7 +63,8 @@ export type IntFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions;
+  DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 export type FloatFieldOptions = (
   | {
@@ -75,7 +80,8 @@ export type FloatFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions;
+  DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 export type DecimalFieldOptions = (
   | {
@@ -93,7 +99,8 @@ export type DecimalFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions;
+  DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 export type BooleanFieldOptions = (
   | {
@@ -106,7 +113,7 @@ export type BooleanFieldOptions = (
       optional?: never;
       list?: true;
     }
-) & { map?: string };
+) & { map?: string } & CommentsOnFieldOptions;
 
 export type DateTimeFieldOptions = {
   default?: { now: true };
@@ -126,7 +133,8 @@ export type JsonFieldOptions = (
       list?: true;
     }
 ) &
-  DefaultFieldOptions;
+  DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 type ReferentialAction =
   | "Cascade"
@@ -149,7 +157,8 @@ export type RelationalFieldOptions = (
   onDelete?: ReferentialAction;
   onUpdate?: ReferentialAction;
   name?: string;
-} & DefaultFieldOptions;
+} & DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 export type EnumFieldOptions = (
   | {
@@ -165,7 +174,8 @@ export type EnumFieldOptions = (
       unique?: never;
     }
 ) &
-  DefaultFieldOptions;
+  DefaultFieldOptions &
+  CommentsOnFieldOptions;
 
 export type FieldOptions =
   | StringFieldOptions
