@@ -25,11 +25,18 @@ export class PrismaSchema {
     basePath: string
   );
   constructor(
+    datasource: PrismaDataSourceOptions,
+    generator: PrismaGeneratorOptions | PrismaMultiGeneratorOptions,
+    basePath: string,
+    additionalPaths: string[]
+  );
+  constructor(
     private readonly datasource: PrismaDataSourceOptions,
     private readonly generator:
       | PrismaGeneratorOptions
       | PrismaMultiGeneratorOptions,
-    private readonly basePath?: string
+    private readonly basePath?: string,
+    private readonly additionalPaths?: string[]
   ) {}
 
   /**
@@ -107,6 +114,17 @@ export class PrismaSchema {
         await importAllFiles(this.basePath, "enums");
         await importAllFiles(this.basePath, "models");
         await importAllFiles(this.basePath, "mixins");
+      }
+
+      if (this.additionalPaths) {
+        await Promise.all(
+          this.additionalPaths.map(async (path) => {
+            const updatedPath = `${this.basePath}/${path}`;
+            await importAllFiles(updatedPath, "enums");
+            await importAllFiles(updatedPath, "models");
+            await importAllFiles(updatedPath, "mixins");
+          })
+        );
       }
 
       process.nextTick(() => {
