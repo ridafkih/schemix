@@ -7,13 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum Status {
-  PENDING
-  LIVE
-  DELETED
-  REMOVED
-}
-
 enum Category {
   ROMANCE
   SCIFI
@@ -25,21 +18,6 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String
   fullName String
-}
-
-model Author {
-  id        Int    @id @default(autoincrement())
-  email     String
-  firstName String
-  LastName  String
-}
-
-model Post {
-  id            Int      @id @default(autoincrement())
-  initializedAt DateTime @default(now())
-  editedAt      DateTime @updatedAt
-  status        Status
-  text          String
 }
 
 model Book {

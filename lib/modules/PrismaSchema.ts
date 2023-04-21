@@ -119,10 +119,9 @@ export class PrismaSchema {
       if (this.additionalPaths) {
         await Promise.all(
           this.additionalPaths.map(async (path) => {
-            const updatedPath = `${this.basePath}/${path}`;
-            await importAllFiles(updatedPath, "enums");
-            await importAllFiles(updatedPath, "models");
-            await importAllFiles(updatedPath, "mixins");
+            await importAllFiles(path, "enums");
+            await importAllFiles(path, "models");
+            await importAllFiles(path, "mixins");
           })
         );
       }
