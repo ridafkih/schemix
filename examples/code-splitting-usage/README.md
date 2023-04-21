@@ -8,7 +8,6 @@ You can specify additional paths to check via the `additionalPaths` key in your 
 
 ### Notes:
 - `additionalPaths` will not be used if there was no `basePath` value passed in.
-- Values of `additionalPaths` should be considered relative to the `basePath` value.
 
 ```prisma
 datasource database {
@@ -18,13 +17,6 @@ datasource database {
 
 generator client {
   provider = "prisma-client-js"
-}
-
-enum Status {
-  PENDING
-  LIVE
-  DELETED
-  REMOVED
 }
 
 enum Category {
@@ -38,21 +30,6 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String
   fullName String
-}
-
-model Author {
-  id        Int    @id @default(autoincrement())
-  email     String
-  firstName String
-  LastName  String
-}
-
-model Post {
-  id            Int      @id @default(autoincrement())
-  initializedAt DateTime @default(now())
-  editedAt      DateTime @updatedAt
-  status        Status
-  text          String
 }
 
 model Book {
@@ -69,5 +46,4 @@ model Reader {
   LastName      String
   numBooks_read Int
 }
-
 ```
