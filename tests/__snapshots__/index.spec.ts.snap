@@ -1,5 +1,31 @@
 // Vitest Snapshot v1
 
+exports[`index > Can use the \`referentialIntegrity\` attributwe 1`] = `
+"datasource database {
+  provider             = \\"cockroachdb\\"
+  url                  = env(\\"DATABASE_URL\\")
+  referentialIntegrity = \\"prisma\\"
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+"
+`;
+
+exports[`index > Can use the \`relationMode\` attributwe 1`] = `
+"datasource database {
+  provider     = \\"cockroachdb\\"
+  url          = env(\\"DATABASE_URL\\")
+  relationMode = \\"prisma\\"
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+"
+`;
+
 exports[`index > Should allow to create schemas from a pre-defined folder structure 1`] = `
 "datasource database {
   provider = \\"cockroachdb\\"
