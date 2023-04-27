@@ -6,7 +6,7 @@ export type PrismaDataSourceProvider =
   | "mongodb"
   | "cockroachdb";
 
-export type PrismaDataSourceReferentialIntegrity = "foreignKeys" | "prisma";
+export type PrismaDataSourceRelationMode = "foreignKeys" | "prisma";
 
 export interface PrismaDataSourceOptions {
   provider: PrismaDataSourceProvider;
@@ -21,5 +21,6 @@ export interface PrismaDataSourceOptions {
         env: string;
       };
   extensions?: string[];
-  referentialIntegrity?: PrismaDataSourceReferentialIntegrity;
+  referentialIntegrity?: PrismaDataSourceRelationMode;
+  relationMode?: PrismaDataSourceRelationMode;
 }
