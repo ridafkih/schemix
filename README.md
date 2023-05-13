@@ -62,7 +62,7 @@ Once that's set up, you can add a script to your `package.json` in your root dir
 
 ## Usage
 
-You can see an example usage in the [example/](./example) folder in this repository.
+You can see an example usage in the [examples/](./examples) folder in this repository.
 
 ### Schema Index
 
