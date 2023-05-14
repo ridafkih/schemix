@@ -19,12 +19,17 @@ enum Status {
   REMOVED
 }
 
+enum UserType {
+  USER
+  SUPERUSER
+}
+
 model Post {
+  status    Status
+  text      String
   id        String   @id @default(uuid()) @database.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  status    Status
-  text      String
   author    User     @relation(fields: [authorId], references: [email])
   authorId  String
 
@@ -32,23 +37,24 @@ model Post {
 }
 
 model User {
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
   posts           Post[]
   auth            Auth?
   friends         User[]   @relation(name: "friends")
   friendRelations User[]   @relation(name: "friends")
   email           String
   fullName        String
+  type            UserType @default(USER)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@map("user")
   @@id([email])
 }
 
 model Auth {
-  id     String @id @default(uuid()) @database.Uuid
   hash   String
   salt   String
   user   User   @relation(fields: [userId], references: [email])
   userId String @unique
+  id     String @id @default(uuid()) @database.Uuid
 }

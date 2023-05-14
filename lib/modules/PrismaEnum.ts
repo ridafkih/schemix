@@ -1,4 +1,4 @@
-import { PrismaEnumOptions } from "typings/prisma-enum";
+import { PrismaEnumOptions, Enum } from "typings/prisma-enum";
 
 export class PrismaEnum {
   private enumMap: Map<string, string | undefined> = new Map();
@@ -7,6 +7,18 @@ export class PrismaEnum {
 
   public addValue(value: string, options?: PrismaEnumOptions) {
     this.enumMap.set(value, options?.map);
+    return this;
+  }
+
+  public fromJSEnum<T extends Enum<T>>(enumLike: T) {
+    const values = Object.entries(enumLike);
+
+    values.forEach(([key, value]) => {
+      if (!isNaN(parseInt(key))) return;
+      const mapValue = typeof value === "string" ? value : undefined;
+      this.enumMap.set(key, mapValue);
+    });
+
     return this;
   }
 

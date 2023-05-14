@@ -1,5 +1,25 @@
 // Vitest Snapshot v1
 
+exports[`PrismaEnum > Should allow importing JS/TS enums through \`fromJSEnum\` 1`] = `
+"enum Avengers {
+  THOR
+  IRON_MAN
+  CAPTAIN_AMERICA
+  BLACK_WIDOW
+  HULK
+}"
+`;
+
+exports[`PrismaEnum > Should allow mapping values through \`fromJSEnum\` 1`] = `
+"enum Avengers {
+  THOR             @map(\\"TO\\")
+  IRON_MAN         @map(\\"TS\\")
+  CAPTAIN_AMERICA  @map(\\"SR\\")
+  BLACK_WIDOW      @map(\\"NR\\")
+  HULK             @map(\\"BB\\")
+}"
+`;
+
 exports[`PrismaEnum > Should support adding enum values 1`] = `
 "enum Avengers {
   THOR
