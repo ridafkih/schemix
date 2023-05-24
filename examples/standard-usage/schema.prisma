@@ -19,6 +19,13 @@ enum Status {
   REMOVED
 }
 
+enum UserRole {
+  MEMBER
+  ADMIN
+
+  @@map("userRole")
+}
+
 model Post {
   id        String   @id @default(uuid()) @database.Uuid
   createdAt DateTime @default(now())
@@ -40,6 +47,7 @@ model User {
   friendRelations User[]   @relation(name: "friends")
   email           String
   fullName        String
+  role            UserRole
 
   @@map("user")
   @@id([email])

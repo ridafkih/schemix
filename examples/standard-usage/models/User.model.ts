@@ -1,4 +1,5 @@
 import { createModel } from "../../../dist";
+import UserRoleEnum from "../enums/UserRole.enum";
 import DateTimeMixin from "../mixins/DateTime.mixin";
 import AuthModel from "./auth/Auth.model";
 import PostModel from "./Post.model";
@@ -12,6 +13,7 @@ export default createModel((UserModel) => {
     .relation("friendRelations", UserModel, { list: true, name: "friends" })
     .string("email")
     .string("fullName")
+    .enum("role", UserRoleEnum)
     .map("user")
     .id({ fields: ["email"] });
 })
