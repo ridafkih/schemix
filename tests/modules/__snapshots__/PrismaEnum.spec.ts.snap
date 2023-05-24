@@ -1,5 +1,13 @@
 // Vitest Snapshot v1
 
+exports[`PrismaEnum > Should support adding a map to the enum 1`] = `
+"enum Food {
+  APPLE
+
+  @@map(\\"food\\")
+}"
+`;
+
 exports[`PrismaEnum > Should support adding enum values 1`] = `
 "enum Avengers {
   THOR

@@ -17,4 +17,10 @@ describe("PrismaEnum", () => {
     const asString = await avengersEnum.toString();
     expect(asString).toMatchSnapshot();
   });
+  it("Should support adding a map to the enum", async () => {
+    const testEnum = new PrismaEnum("Food").map("food").addValue("APPLE");
+
+    const asString = await testEnum.toString();
+    expect(asString).toMatchSnapshot();
+  });
 });
