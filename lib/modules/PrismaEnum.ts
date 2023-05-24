@@ -1,12 +1,20 @@
 import { PrismaEnumOptions } from "typings/prisma-enum";
+import { ModelMapOptions } from "typings/prisma-type-options";
+import { buildModelMap } from "util/options";
 
 export class PrismaEnum {
   private enumMap: Map<string, string | undefined> = new Map();
+  private blockAttributes: string[] = [];
 
   constructor(public readonly name: string) {}
 
   public addValue(value: string, options?: PrismaEnumOptions) {
     this.enumMap.set(value, options?.map);
+    return this;
+  }
+
+  public map(options: ModelMapOptions) {
+    this.blockAttributes.push(buildModelMap(options));
     return this;
   }
 
@@ -25,6 +33,18 @@ export class PrismaEnum {
       })
       .join("\n");
 
-    return [`enum ${this.name} {`, lines, "}"].join("\n");
+    return [
+      `enum ${this.name} {`,
+      lines,
+      ...(this.blockAttributes.length
+        ? [
+            "",
+            ...this.blockAttributes.map(
+              (blockAttribute) => "  " + blockAttribute
+            ),
+          ]
+        : []),
+      "}",
+    ].join("\n");
   }
 }
