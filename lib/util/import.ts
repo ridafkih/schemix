@@ -20,7 +20,13 @@ const getAllFilesRecursively = async (
 ): Promise<string[]> => {
   const directoryPath = join(basePath, folderName);
 
-  const fileNames = await readdir(directoryPath);
+  const fileNames = await readdir(directoryPath).catch(
+    (error: NodeJS.ErrnoException) => {
+      if (error.code === "ENOENT") return <string[]>[];
+      throw error;
+    }
+  );
+
   const directories = await asyncFilter(fileNames, async (fileName) =>
     isDirectory(join(directoryPath, fileName))
   );
@@ -54,7 +60,7 @@ const importFilteredFiles = (filePaths: string[]): Promise<unknown>[] => {
 };
 
 export const importAllFiles = async (basePath: string, folderName: string) => {
-  return getAllFilesRecursively(basePath, folderName)
-    .then((files) => Promise.all(importFilteredFiles(files)))
-    .catch(console.error);
+  return getAllFilesRecursively(basePath, folderName).then((files) =>
+    Promise.all(importFilteredFiles(files))
+  );
 };
