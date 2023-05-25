@@ -1,0 +1,67 @@
+// Vitest Snapshot v1
+
+exports[`index > should allow compiling schemas from multiple folders with additionalPaths 1`] = `
+"datasource database {
+  provider = \\"cockroachdb\\"
+  url      = env(\\"DATABASE_URL\\")
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BANNED
+}
+
+enum Status {
+  PENDING
+  LIVE
+  DELETED
+  REMOVED
+}
+
+model Post {
+  id        String   @default(uuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  deleted   Boolean
+  imageUrl  String
+}
+
+model ImagePost {
+  id        String   @default(uuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  deleted   Boolean
+  imageUrl  String
+}
+
+model User {
+  id        String     @default(uuid()) @id
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  status    UserStatus
+  posts     Post[]
+}
+
+model Author {
+  id        Int    @id @default(autoincrement())
+  email     String
+  firstName String
+  LastName  String
+}
+
+model Book {
+  id            Int      @id @default(autoincrement())
+  initializedAt DateTime @default(now())
+  editedAt      DateTime @updatedAt
+  status        Status
+  text          String
+}
+"
+`;
