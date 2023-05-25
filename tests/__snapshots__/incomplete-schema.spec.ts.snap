@@ -1,0 +1,57 @@
+// Vitest Snapshot v1
+
+exports[`index > should allow the generation of schemas which don't have certain folders (models/, mixins/, enums/) defined 1`] = `
+"datasource database {
+  provider = \\"cockroachdb\\"
+  url      = env(\\"DATABASE_URL\\")
+}
+
+generator client {
+  provider = \\"prisma-client-js\\"
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BANNED
+}
+
+model Post {
+  id        String   @default(uuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  deleted   Boolean
+  imageUrl  String
+}
+
+model ImagePost {
+  id        String   @default(uuid()) @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  deleted   Boolean
+  imageUrl  String
+}
+
+model User {
+  id        String     @default(uuid()) @id
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  status    UserStatus
+  posts     Post[]
+}
+
+model Author {
+  id        Int    @id @default(autoincrement())
+  email     String
+  firstName String
+  LastName  String
+}
+
+model Book {
+  id   Int    @id @default(autoincrement())
+  text String
+}
+"
+`;
