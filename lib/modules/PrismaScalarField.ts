@@ -65,6 +65,11 @@ export class PrismaScalarField {
     return this;
   }
 
+  public setIgnore() {
+    this.attributes.set("ignore", "@ignore");
+    return this;
+  }
+
   public mapTo(fieldName: string) {
     this.attributes.set("map", `@map("${fieldName}")`);
     return this;

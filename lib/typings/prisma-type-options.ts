@@ -5,6 +5,7 @@ export type DefaultFieldOptions = {
   comments?: Comment[];
   map?: string;
   raw?: string;
+  ignore?: boolean;
 };
 
 export type StringFieldOptions = (

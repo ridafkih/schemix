@@ -45,6 +45,7 @@ model User {
   friendRelations User[]   @relation(name: "friends")
   email           String
   fullName        String
+  age             Int      @ignore
 
   @@id([email])
 }
