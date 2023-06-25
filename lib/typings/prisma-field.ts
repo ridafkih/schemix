@@ -18,6 +18,7 @@ export type PrismaFieldAttribute =
   | "@id"
   | "@updatedAt"
   | `@map("${string}")`
-  | `@default(${string})`;
+  | `@default(${string})`
+  | "@ignore";
 
 export type PrismaFieldModifier = "?" | "[]" | "";

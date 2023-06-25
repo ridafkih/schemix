@@ -105,15 +105,7 @@ exports[`PrismaModel > Should allow setting precision of decimals through the pr
 }"
 `;
 
-exports[`PrismaModel > Should inherit comments from mixins > // This is a comment on the User model
-// This is a comment on the mixin
-model User {
-  // This is a comment on the id field
-  /// @Field()
-  id          String @id @default(uuid())
-  email       String
-  phoneNumber String
-} 1`] = `
+exports[`PrismaModel > Should inherit comments from mixins 1`] = `
 "// This is a comment on the User model
 // This is a comment on the mixin
 model User {
@@ -184,6 +176,14 @@ exports[`PrismaModel > Should support every scalar field type 1`] = `
   boolean  Boolean
   dateTime DateTime
   json     Json
+}"
+`;
+
+exports[`PrismaModel > Should support ignore directive 1`] = `
+"model User {
+  id          String @default(uuid()) @id
+  email       String
+  phoneNumber String @ignore
 }"
 `;
 

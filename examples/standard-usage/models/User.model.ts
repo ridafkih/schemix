@@ -13,6 +13,7 @@ export default createModel((UserModel) => {
     .relation("friendRelations", UserModel, { list: true, name: "friends" })
     .string("email")
     .string("fullName")
+    .int("age", { ignore: true })
     .enum("role", UserRoleEnum)
     .map("user")
     .id({ fields: ["email"] });

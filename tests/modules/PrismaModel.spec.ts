@@ -256,6 +256,16 @@ describe("PrismaModel", () => {
       .string("phoneNumber");
 
     const asString = await model.toString();
-    expect(asString).toMatchSnapshot(asString);
+    expect(asString).toMatchSnapshot();
+  });
+
+  it("Should support ignore directive", async () => {
+    const model = new PrismaModel("User")
+      .string("id", { default: { uuid: true }, id: true })
+      .string("email")
+      .string("phoneNumber", { ignore: true });
+
+    const asString = await model.toString();
+    expect(asString).toMatchSnapshot();
   });
 });

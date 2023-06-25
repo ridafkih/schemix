@@ -32,6 +32,7 @@ export const handleScalarOptions = <T extends FieldOptions>(
     updatedAt: "setToUpdatedAt",
     raw: "setRawAttributes",
     comments: "setComments",
+    ignore: "setIgnore",
   };
 
   for (const [key, value] of Object.entries(options)) {
