@@ -51,6 +51,11 @@ export class PrismaRelationalField {
     return this;
   }
 
+  public setMap(action: string) {
+    this.relationAttributes.set("map", action);
+    return this;
+  }
+
   public setOptional() {
     this.modifier = "?";
     return this;
@@ -58,11 +63,6 @@ export class PrismaRelationalField {
 
   public setList() {
     this.modifier = "[]";
-    return this;
-  }
-
-  public mapTo(fieldName: string) {
-    this.attributes.set("map", `@map("${fieldName}")`);
     return this;
   }
 

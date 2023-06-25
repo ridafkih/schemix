@@ -52,7 +52,7 @@ export const handleRelationalOptions = <T extends RelationalFieldOptions>(
   const propertyMap: Record<string, keyof PrismaRelationalField> = {
     optional: "setOptional",
     list: "setList",
-    map: "mapTo",
+    map: "setMap",
     fields: "setFields",
     name: "setName",
     references: "setReferences",
