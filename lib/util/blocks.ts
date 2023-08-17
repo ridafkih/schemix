@@ -17,6 +17,10 @@ export const parseKeyValueBlock = (
         return `  ${key.padEnd(tokenPadding)} = env("${value.env}")`;
       }
 
+      if (key === "directUrl" && typeof value !== "string" && "env" in value) {
+        return `  ${key.padEnd(tokenPadding)} = env("${value.env}")`;
+      }
+
       if (
         key === "shadowDatabaseUrl" &&
         typeof value !== "string" &&

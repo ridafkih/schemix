@@ -15,6 +15,11 @@ export interface PrismaDataSourceOptions {
     | {
         env: string;
       };
+  directUrl?:
+    | string
+    | {
+        env: string;
+      };    
   shadowDatabaseUrl?:
     | string
     | {
