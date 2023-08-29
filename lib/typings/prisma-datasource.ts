@@ -19,7 +19,7 @@ export interface PrismaDataSourceOptions {
     | string
     | {
         env: string;
-      };    
+      };
   shadowDatabaseUrl?:
     | string
     | {
