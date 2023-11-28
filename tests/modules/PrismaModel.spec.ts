@@ -15,11 +15,11 @@ const scalarFieldTypes = [
 
 describe("PrismaModel", () => {
   it("Should support setting the model name", () => {
-    const model = new PrismaModel("Model");
+    const model = new PrismaModel({ name: "Model" });
     expect(model.name).toBe("Model");
   });
   it("Should support every scalar field type", async () => {
-    const model = new PrismaModel("Model").string("id", {
+    const model = new PrismaModel({ name: "Model" }).string("id", {
       default: { uuid: true },
       id: true,
     });
@@ -31,7 +31,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should support adding fields", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", {
         default: { uuid: true },
         id: true,
@@ -42,7 +42,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should support adding unique constraints", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .string("email")
       .string("phoneNumber")
@@ -52,7 +52,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should support adding a map", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .map("normal_user");
 
@@ -60,7 +60,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot(asString);
   });
   it("Should allow adding a composite id attribute", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("email")
       .id({ fields: ["email"] });
 
@@ -68,7 +68,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should allow setting @updatedAt and @default(now()) on DateTime fields", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .dateTime("updatedAt", { updatedAt: true })
       .dateTime("createdAt", { default: { now: true } });
@@ -77,7 +77,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should allow setting precision of decimals through the precision option on the field", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .decimal("longitude", { precision: [10, 8] })
       .decimal("latitude", { precision: [10, 8] })
@@ -88,7 +88,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should allow setting defaults for Json fields", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .json("json", { default: { isJson: true } });
 
@@ -96,7 +96,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot(asString);
   });
   it("Should allow appending raw attributes", async () => {
-    const model = new PrismaModel("Ambiguous")
+    const model = new PrismaModel({ name: "Ambiguous" })
       .string("id", { default: { uuid: true }, id: true })
       .raw('@@map("normal_user")');
 
@@ -104,7 +104,7 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should allow appending raw fields", async () => {
-    const model = new PrismaModel("Ambiguous")
+    const model = new PrismaModel({ name: "Ambiguous" })
       .string("id", { default: { uuid: true }, id: true })
       .raw("email String?");
 
@@ -116,7 +116,7 @@ describe("PrismaModel", () => {
       .addValue("GREEN")
       .addValue("NOT_GREEN");
 
-    const model = new PrismaModel("Farm")
+    const model = new PrismaModel({ name: "Farm" })
       .string("id", { default: { uuid: true }, id: true })
       .enum("beans", enumValues);
 
@@ -129,7 +129,7 @@ describe("PrismaModel", () => {
       id: true,
     });
 
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .mixin(uuidMixin)
       .string("email")
       .string("phoneNumber");
@@ -142,7 +142,7 @@ describe("PrismaModel", () => {
       .string("email")
       .raw("@@index([email])");
 
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .mixin(emailMixin)
       .string("phoneNumber");
@@ -161,8 +161,8 @@ describe("PrismaModel", () => {
     expect(asString).toMatchSnapshot();
   });
   it("Should allow relations", async () => {
-    const postModel = new PrismaModel("Post");
-    const userModel = new PrismaModel("User");
+    const postModel = new PrismaModel({ name: "Post" });
+    const userModel = new PrismaModel({ name: "User" });
 
     postModel
       .string("id", { default: { uuid: true }, id: true })
@@ -184,10 +184,9 @@ describe("PrismaModel", () => {
     expect(postModelAsString).toMatchSnapshot();
     expect(userModelAsString).toMatchSnapshot();
   });
-
   it("Should allow comments on Models and Fields", async () => {
-    const postModel = new PrismaModel("Post");
-    const userModel = new PrismaModel("User");
+    const postModel = new PrismaModel({ name: "Post" });
+    const userModel = new PrismaModel({ name: "User" });
 
     const enumValues = new PrismaEnum("Beans")
       .addValue("GREEN")
@@ -239,7 +238,6 @@ describe("PrismaModel", () => {
     expect(postModelAsString).toMatchSnapshot();
     expect(userModelAsString).toMatchSnapshot();
   });
-
   it("Should inherit comments from mixins", async () => {
     const uuidMixin = new PrismaModel()
       .comment("// This is a comment on the mixin")
@@ -249,7 +247,7 @@ describe("PrismaModel", () => {
         comments: ["// This is a comment on the id field", "/// @Field()"],
       });
 
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .mixin(uuidMixin)
       .comment("// This is a comment on the User model")
       .string("email")
@@ -258,14 +256,23 @@ describe("PrismaModel", () => {
     const asString = await model.toString();
     expect(asString).toMatchSnapshot();
   });
-
   it("Should support ignore directive", async () => {
-    const model = new PrismaModel("User")
+    const model = new PrismaModel({ name: "User" })
       .string("id", { default: { uuid: true }, id: true })
       .string("email")
       .string("phoneNumber", { ignore: true });
 
     const asString = await model.toString();
+    expect(asString).toMatchSnapshot();
+  });
+  it("Should create view, not model", async () => {
+    const view = new PrismaModel({ name: "UserProfile", schemaType: "view" })
+      .string("user_id", {
+        unique: true,
+      })
+      .string("email")
+      .string("phoneNumber", { ignore: true });
+    const asString = await view.toString();
     expect(asString).toMatchSnapshot();
   });
 });

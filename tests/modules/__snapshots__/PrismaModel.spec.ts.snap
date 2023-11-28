@@ -105,6 +105,14 @@ exports[`PrismaModel > Should allow setting precision of decimals through the pr
 }"
 `;
 
+exports[`PrismaModel > Should create view, not model 1`] = `
+"view UserProfile {
+  user_id     String @unique
+  email       String
+  phoneNumber String @ignore
+}"
+`;
+
 exports[`PrismaModel > Should inherit comments from mixins 1`] = `
 "// This is a comment on the User model
 // This is a comment on the mixin

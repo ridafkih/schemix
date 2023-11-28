@@ -41,13 +41,28 @@ export class PrismaModel {
   private blockAttributes: string[] = [];
   private rawFields: string[] = [];
   private comments: Comment[] = [];
+  private schemaType: "model" | "view" = "model";
 
-  constructor(name?: string | null, schema?: PrismaSchema);
-  constructor(name?: string | null);
+  private readonly schema?: PrismaSchema;
+  public readonly name?: string | null;
+
   constructor(
-    public readonly name?: string | null,
-    private readonly schema?: PrismaSchema
-  ) {}
+    {
+      name,
+      schema,
+      schemaType = "model",
+    }: {
+      name?: string | null;
+      schema?: PrismaSchema;
+      schemaType?: "model" | "view";
+    } = {
+      schemaType: "model",
+    }
+  ) {
+    if (name !== undefined) this.name = name;
+    if (schema !== undefined) this.schema = schema;
+    this.schemaType = schemaType;
+  }
 
   public comment(...comments: Comment[]) {
     this.comments.push(...comments);
@@ -154,7 +169,7 @@ export class PrismaModel {
   public extend(name: string) {
     const clone = this.schema
       ? this.schema.createModel(name)
-      : new PrismaModel(name);
+      : new PrismaModel({ name });
     clone.fields = this.fields;
     clone.rawFields = this.rawFields;
     return clone;
@@ -166,7 +181,7 @@ export class PrismaModel {
         resolve(
           [
             ...this.comments,
-            `model ${this.name} {`,
+            `${this.schemaType} ${this.name} {`,
             this.parseFields(),
             "}",
           ].join("\n")

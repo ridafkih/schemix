@@ -78,7 +78,7 @@ export class PrismaSchema {
    * @returns The `PrismaModel` object.
    */
   public createMixin() {
-    const model = new PrismaModel(null, this);
+    const model = new PrismaModel({ name: null, schema: this });
     return model;
   }
 
@@ -88,7 +88,22 @@ export class PrismaSchema {
    * @returns The `PrismaModel` object.
    */
   public createModel(modelName: string) {
-    const model = new PrismaModel(modelName, this);
+    const model = new PrismaModel({ name: modelName, schema: this });
+    this.models.set(modelName, model);
+    return model;
+  }
+
+  /**
+   * Creates a `PrismaModel` those schemaType is `view` object and automatically attaches it to the schema.
+   * @param modelName The name of the view.
+   * @returns The `PrismaModel` object.
+   */
+  public createView(modelName: string) {
+    const model = new PrismaModel({
+      name: modelName,
+      schema: this,
+      schemaType: "view",
+    });
     this.models.set(modelName, model);
     return model;
   }

@@ -31,6 +31,32 @@ export function createModel(
   }
 }
 
+export function createView(
+  name: string,
+  callback: (Model: PrismaModel) => void
+): PrismaModel;
+
+export function createView(callback: (View: PrismaModel) => void): PrismaModel;
+
+export function createView(
+  param1: string | ((View: PrismaModel) => void),
+  param2?: (View: PrismaModel) => void
+): PrismaModel | undefined {
+  if (!schema) throw Error("Schema was not initialized.");
+
+  if (typeof param1 === "string" && typeof param2 === "function") {
+    const model = schema.createView(param1);
+    setImmediate(param2, model);
+    return model;
+  }
+
+  if (typeof param1 === "function" && !param2) {
+    const model = schema.createView(getCallerFileName());
+    setImmediate(param1, model);
+    return model;
+  }
+}
+
 export function createEnum(
   name: string,
   callback: (Enum: PrismaEnum) => void
