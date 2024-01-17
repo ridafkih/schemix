@@ -12,6 +12,19 @@ import {
   RelationalFieldOptions,
 } from "typings/prisma-type-options";
 
+const scalarPropertyMap: Record<string, keyof PrismaScalarField> = {
+  id: "setAsId",
+  optional: "setOptional",
+  list: "setList",
+  unique: "setUnique",
+  default: "setDefault",
+  map: "mapTo",
+  updatedAt: "setToUpdatedAt",
+  raw: "setRawAttributes",
+  comments: "setComments",
+  ignore: "setIgnore",
+};
+
 /**
  * Manipulates the `PrismaScalarField` based on the options provided.
  * @param field THe prisma scalar field object.
@@ -22,22 +35,23 @@ export const handleScalarOptions = <T extends FieldOptions>(
   options: T
 ) => {
   const keyBlacklist: string[] = ["precision"];
-  const propertyMap: Record<string, keyof PrismaScalarField> = {
-    id: "setAsId",
-    optional: "setOptional",
-    list: "setList",
-    unique: "setUnique",
-    default: "setDefault",
-    map: "mapTo",
-    updatedAt: "setToUpdatedAt",
-    raw: "setRawAttributes",
-    comments: "setComments",
-    ignore: "setIgnore",
-  };
 
   for (const [key, value] of Object.entries(options)) {
-    if (!keyBlacklist.includes(key)) field[propertyMap[key]](value);
+    if (!keyBlacklist.includes(key)) field[scalarPropertyMap[key]](value);
   }
+};
+
+const relationalPropertyMap: Record<string, keyof PrismaRelationalField> = {
+  optional: "setOptional",
+  list: "setList",
+  map: "setMap",
+  fields: "setFields",
+  name: "setName",
+  references: "setReferences",
+  onDelete: "setOnDelete",
+  onUpdate: "setOnUpdate",
+  raw: "setRawAttributes",
+  comments: "setComments",
 };
 
 /**
@@ -49,21 +63,18 @@ export const handleRelationalOptions = <T extends RelationalFieldOptions>(
   field: PrismaRelationalField,
   options: T
 ) => {
-  const propertyMap: Record<string, keyof PrismaRelationalField> = {
-    optional: "setOptional",
-    list: "setList",
-    map: "setMap",
-    fields: "setFields",
-    name: "setName",
-    references: "setReferences",
-    onDelete: "setOnDelete",
-    onUpdate: "setOnUpdate",
-    raw: "setRawAttributes",
-    comments: "setComments",
-  };
-
   for (const [key, value] of Object.entries(options))
-    field[propertyMap[key]]?.(value);
+    field[relationalPropertyMap[key]]?.(value);
+};
+
+const enumMap: Record<string, keyof PrismaEnumField> = {
+  default: "setDefault",
+  optional: "setOptional",
+  list: "setList",
+  unique: "setUnique",
+  map: "mapTo",
+  raw: "setRawAttributes",
+  comments: "setComments",
 };
 
 /**
@@ -75,18 +86,8 @@ export const handleEnumOptions = <T extends EnumFieldOptions>(
   field: PrismaEnumField,
   options: T
 ) => {
-  const propertyMap: Record<string, keyof PrismaEnumField> = {
-    default: "setDefault",
-    optional: "setOptional",
-    list: "setList",
-    unique: "setUnique",
-    map: "mapTo",
-    raw: "setRawAttributes",
-    comments: "setComments",
-  };
-
   for (const [key, value] of Object.entries(options))
-    field[propertyMap[key]]?.(value);
+    field[enumMap[key]]?.(value);
 };
 
 export const buildCompositeId = (options: CompositeIDFieldOptions) => {
